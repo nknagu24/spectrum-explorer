@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./index.css";
 
 import { photonFromWavelength } from "./physics/photon";
+import PhotonReadout from "./components/PhotonReadout";
+import SpectrumCanvas from "./components/SpectrumCanvas";
 
 function App() {
   const [wavelength, setWavelength] = useState(680);
@@ -11,42 +13,35 @@ function App() {
   return (
     <main>
       <h1>Spectrum Explorer</h1>
+      <p>Interactive spectroscopy tools for researchers.</p>
 
-      <input
-        type="range"
-        min={250}
-        max={1000}
-        value={wavelength}
-        onChange={(e) => setWavelength(Number(e.target.value))}
-      />
+      <div className="controls">
+        <label>
+          Wavelength (nm)
+          <input
+            type="range"
+            min={250}
+            max={1000}
+            value={wavelength}
+            onChange={(e) => setWavelength(Number(e.target.value))}
+          />
+        </label>
 
-      <br />
-      <br />
+        <label>
+          Enter Wavelength (nm)
+          <input
+            type="number"
+            min={250}
+            max={1000}
+            value={wavelength}
+            onChange={(e) => setWavelength(Number(e.target.value))}
+          />
+        </label>
+      </div>
 
-      <input
-        type="number"
-        value={wavelength}
-        onChange={(e) => setWavelength(Number(e.target.value))}
-      />
+      <SpectrumCanvas />
 
-      <table>
-        <tbody>
-          <tr>
-            <td>Energy</td>
-            <td>{photon.energyEV.toFixed(4)} eV</td>
-          </tr>
-
-          <tr>
-            <td>Frequency</td>
-            <td>{photon.frequencyTHz.toFixed(2)} THz</td>
-          </tr>
-
-          <tr>
-            <td>Wavenumber</td>
-            <td>{photon.wavenumberCM.toFixed(1)} cm⁻¹</td>
-          </tr>
-        </tbody>
-      </table>
+      <PhotonReadout photon={photon} />
     </main>
   );
 }
