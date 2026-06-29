@@ -1,5 +1,7 @@
 import type { Photon } from "../types/photon";
 import ValueRow from "./ValueRow";
+import "../styles/photonReadout.css";
+import { formatScientific } from "../utils/format";
 
 interface PhotonReadoutProps {
     photon: Photon;
@@ -10,11 +12,10 @@ export default function PhotonReadout({
 }: PhotonReadoutProps) {
     return (
         <div className="photon-card">
-            <h2>Photon Properties</h2>
 
             <ValueRow
                 label="Wavelength"
-                value={`${photon.wavelengthNm.toFixed(1)} nm`}
+                value={`${photon.wavelengthNm.toFixed(3)} nm`}
             />
 
             <ValueRow
@@ -34,7 +35,7 @@ export default function PhotonReadout({
 
             <ValueRow
                 label="Momentum"
-                value={photon.momentum.toExponential(3)}
+                value={`${formatScientific(photon.momentum)} kg·m/s`}
             />
         </div>
     );

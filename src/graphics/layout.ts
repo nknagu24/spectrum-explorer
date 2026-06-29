@@ -8,16 +8,17 @@
 
 /* Canvas Size */
 
+
 export const SVG_WIDTH = 1000;
-export const SVG_HEIGHT = 260;
+export const SVG_HEIGHT = 180;
 
 /* Margins */
 
 export const LEFT_MARGIN = 70;
 export const RIGHT_MARGIN = 40;
 
-export const TOP_MARGIN = 30;
-export const BOTTOM_MARGIN = 40;
+export const TOP_MARGIN = 12;
+export const BOTTOM_MARGIN = 20;
 
 /* Drawable Region */
 
@@ -38,13 +39,13 @@ export const MAX_WAVELENGTH = 1000;
  */
 
 export const WAVELENGTH_AXIS_Y =
-    TOP_MARGIN + DRAWING_HEIGHT + 20;
+    TOP_MARGIN + DRAWING_HEIGHT + 12;
 
 /**
 * Visible spectrum bar
 */
 
-export const SPECTRUM_BAR_HEIGHT = 28;
+export const SPECTRUM_BAR_HEIGHT = 20;
 
 export const SPECTRUM_BAR_Y =
     TOP_MARGIN +
@@ -54,4 +55,5 @@ export const SPECTRUM_BAR_Y =
  * Tick label position
  */
 
-export const TICK_LABEL_Y = WAVELENGTH_AXIS_Y + 24;
+export const TICK_LABEL_Y =
+    WAVELENGTH_AXIS_Y + 18;

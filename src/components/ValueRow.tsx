@@ -9,8 +9,15 @@ export default function ValueRow({
 }: ValueRowProps) {
     return (
         <div className="property">
-            <span>{label}</span>
-            <span>{value}</span>
+
+            <span className="property-label">
+                {label}
+            </span>
+
+            <span className="property-value">
+                {value}
+            </span>
+
         </div>
     );
 }

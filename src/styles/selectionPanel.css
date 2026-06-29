@@ -1,0 +1,42 @@
+/* ==========================================================
+   Selection Panel
+   ========================================================== */
+
+.selection-panel {
+
+    display: grid;
+
+    grid-template-columns: 5rem 1fr;
+
+    row-gap: 18px;
+    column-gap: 20px;
+
+    align-items: center;
+
+}
+
+.selection-label {
+
+    color: #4b5563;
+
+    font-size: 0.95rem;
+
+    font-weight: 500;
+
+}
+
+.selection-value {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+.selection-value input {
+
+    width: 100%;
+
+    font-family: "Roboto Mono", monospace;
+
+}
