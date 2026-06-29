@@ -13,15 +13,33 @@ import Cursor from "./Cursor";
 import SpectrumRegions from "./SpectrumRegions";
 import RegionLabels from "./RegionLabels";
 import InteractionLayer from "./InteractionLayer";
+import LaserMarkers from "./LaserMarkers";
+import type { LaserCategory } from "../types/laserCategory";
 
 interface SpectrumCanvasProps {
+
     wavelength: number;
-    onWavelengthChange: (wavelength: number) => void;
+
+    showLasers: boolean;
+
+    laserCategory: LaserCategory;
+
+    onWavelengthChange: (
+        wavelength: number,
+    ) => void;
+
 }
 
 export default function SpectrumCanvas({
+
     wavelength,
+
+    showLasers,
+
+    laserCategory,
+
     onWavelengthChange,
+
 }: SpectrumCanvasProps) {
     return (
         <svg
@@ -50,6 +68,16 @@ export default function SpectrumCanvas({
 
             <SpectrumBar />
 
+            {showLasers && (
+
+                <LaserMarkers
+                    category={laserCategory}
+                    onWavelengthChange={
+                        onWavelengthChange
+                    }
+                />
+
+            )}
             <Cursor wavelength={wavelength} />
 
             <WavelengthAxis />

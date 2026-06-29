@@ -231,3 +231,197 @@ p {
   user-select: none;
 
 }
+
+
+
+
+/* ==========================================================
+   Overlay Panel
+   ========================================================== */
+
+.overlay-panel {
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+
+}
+
+.overlay-panel h2 {
+
+  margin: 0;
+
+}
+
+.overlay-toggle {
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+}
+
+.overlay-toggle input {
+
+  width: 16px;
+  height: 16px;
+
+}
+
+
+/* ==========================================================
+   Laser Information
+   ========================================================== */
+
+.laser-name {
+
+  font-size: 1.25rem;
+  font-weight: 700;
+
+  margin-bottom: 20px;
+
+  color: #111827;
+
+}
+
+.laser-dyk {
+
+  margin-top: 20px;
+
+  padding-top: 16px;
+
+  border-top: 1px solid #e5e7eb;
+
+}
+
+.laser-dyk p {
+
+  margin: 8px 0 0;
+
+  color: #4b5563;
+
+  line-height: 1.6;
+
+}
+
+
+/* ==========================================================
+   Bottom Panel
+   ========================================================== */
+
+.bottom-panel {
+
+  display: grid;
+
+  grid-template-columns: 320px 1fr;
+
+  gap: 24px;
+
+  margin-top: 24px;
+
+}
+
+.overlay-card {
+
+  align-self: start;
+
+}
+
+.laser-info-card {
+
+  align-self: start;
+
+}
+
+@media (max-width: 900px) {
+
+  .bottom-panel {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+
+.overlay-panel .segmented-control {
+
+  display: flex;
+
+  width: 100%;
+
+}
+
+.overlay-panel .segment {
+
+  flex: 1;
+
+  padding: 8px 0;
+
+}
+
+/* ==========================================================
+   Available Sources
+   ========================================================== */
+
+.available-sources {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+
+}
+
+.source-list {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+}
+
+.source-chip {
+
+  padding: 8px 14px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 999px;
+
+  background: white;
+
+  cursor: pointer;
+
+  font-size: 0.9rem;
+
+  transition: 0.2s;
+
+}
+
+.source-chip:hover:not(.active) {
+
+  background: #f3f4f6;
+
+}
+
+.source-chip.active {
+
+  background: #2563eb;
+
+  color: white;
+
+  border-color: #2563eb;
+
+  font-weight: 600;
+
+}

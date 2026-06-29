@@ -10,7 +10,17 @@ import { photonFromWavelength } from "./physics/photon";
 
 import PhotonReadout from "./components/PhotonReadout";
 import SpectrumCanvas from "./components/SpectrumCanvas";
-import SelectionPanel from "./components/SelectionPanel";;
+import SelectionPanel from "./components/SelectionPanel";
+
+import OverlayPanel from "./components/OverlayPanel";
+import type { LaserCategory }
+  from "./types/laserCategory";
+import { findNearestLaser }
+  from "./data/lasers/findNearestLaser";
+import LaserInfoCard from "./components/LaserInfoCard";
+import AvailableSources from "./components/AvailableSources";
+import type { Laser } from "./types/laser";
+
 
 function App() {
   /* ==========================================================
@@ -22,8 +32,18 @@ function App() {
   const [inputMode, setInputMode] =
     useState<InputMode>("nm");
 
+  const [showLasers, setShowLasers] =
+    useState(false);
+
+  const [laserCategory, setLaserCategory] =
+    useState<LaserCategory>("modern");
+
   const [inputText, setInputText] =
     useState(wavelength.toFixed(2));
+
+  const [selectedLaser, setSelectedLaser] =
+    useState<Laser | null>(null);
+
   /* ==========================================================
    * Derived Data
    * ========================================================== */
@@ -31,12 +51,11 @@ function App() {
   const photon = photonFromWavelength(wavelength);
 
 
-  const inputLabel =
-    inputMode === "nm"
-      ? "Enter Wavelength (nm)"
-      : "Enter Energy (eV)";
-
-
+  const nearestLaser =
+    findNearestLaser(
+      wavelength,
+      laserCategory,
+    );
 
   useEffect(() => {
 
@@ -59,11 +78,45 @@ function App() {
     photon.energyEV,
     inputMode,
   ]);
+  useEffect(() => {
 
+    setSelectedLaser(
+
+      findNearestLaser(
+        wavelength,
+        laserCategory,
+      )
+
+    );
+
+  }, [
+
+    wavelength,
+
+    laserCategory,
+
+  ]);
   /* ==========================================================
    * Event Handlers
    * ========================================================== */
+  function handleLaserSelect(
+    laser: Laser,
+  ) {
 
+    setSelectedLaser(laser);
+
+    if (
+      laser.wavelength >= 250 &&
+      laser.wavelength <= 1000
+    ) {
+
+      setWavelength(
+        laser.wavelength,
+      );
+
+    }
+
+  }
 
   function commitInput() {
 
@@ -123,15 +176,57 @@ function App() {
 
       <div className="card spectrum-card">
 
-        <h2>Spectrum</h2>
+        <h2>Visible Spectrum</h2>
 
         <SpectrumCanvas
           wavelength={wavelength}
+          showLasers={showLasers}
+          laserCategory={laserCategory}
           onWavelengthChange={setWavelength}
         />
 
       </div>
+      <div className="bottom-panel">
 
+        <div className="card overlay-card">
+
+          <OverlayPanel
+            showLasers={showLasers}
+            laserCategory={laserCategory}
+            onShowLasersChange={setShowLasers}
+            onLaserCategoryChange={setLaserCategory}
+          />
+
+        </div>
+        {showLasers && selectedLaser && (
+
+          <div className="card laser-info-card">
+
+            <LaserInfoCard
+              laser={selectedLaser}
+            />
+
+          </div>
+
+        )}
+      </div>
+      {showLasers && (
+
+        <div className="card available-sources-card">
+
+          <AvailableSources
+
+            category={laserCategory}
+
+            selectedLaser={selectedLaser}
+
+            onLaserSelect={handleLaserSelect}
+
+          />
+
+        </div>
+
+      )}
 
     </main>
   );
