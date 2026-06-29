@@ -22,7 +22,18 @@ export function wavelengthToX(
 
 }
 
+export function xToWavelength(
+    x: number,
+): number {
 
+    return (
+        MIN_WAVELENGTH +
+        ((x - LEFT_MARGIN) /
+            DRAWING_WIDTH) *
+        (MAX_WAVELENGTH - MIN_WAVELENGTH)
+    );
+
+}
 
 export function wavelengthToPercent(
     wavelength: number,

@@ -41,6 +41,7 @@ function App() {
 
       <SpectrumCanvas
         wavelength={wavelength}
+        onWavelengthChange={setWavelength}
       />
 
       <PhotonReadout photon={photon} />

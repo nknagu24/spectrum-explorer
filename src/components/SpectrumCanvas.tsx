@@ -13,10 +13,12 @@ import Cursor from "./Cursor";
 
 interface SpectrumCanvasProps {
     wavelength: number;
+    onWavelengthChange: (wavelength: number) => void;
 }
 
 export default function SpectrumCanvas({
     wavelength,
+    onWavelengthChange,
 }: SpectrumCanvasProps) {
     return (
         <svg
@@ -36,7 +38,9 @@ export default function SpectrumCanvas({
             />
             <DrawingArea />
 
-            <SpectrumBar />
+            <SpectrumBar
+                onWavelengthChange={onWavelengthChange}
+            />
 
             <Cursor wavelength={wavelength} />
 
