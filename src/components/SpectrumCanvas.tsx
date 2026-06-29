@@ -12,6 +12,7 @@ import TickLabels from "./TickLabels";
 import Cursor from "./Cursor";
 import SpectrumRegions from "./SpectrumRegions";
 import RegionLabels from "./RegionLabels";
+import InteractionLayer from "./InteractionLayer";
 
 interface SpectrumCanvasProps {
     wavelength: number;
@@ -40,13 +41,14 @@ export default function SpectrumCanvas({
             />
             <DrawingArea />
 
+
+
+
             <SpectrumRegions />
 
             <RegionLabels />
 
-            <SpectrumBar
-                onWavelengthChange={onWavelengthChange}
-            />
+            <SpectrumBar />
 
             <Cursor wavelength={wavelength} />
 
@@ -55,6 +57,10 @@ export default function SpectrumCanvas({
             <TickMarks />
 
             <TickLabels />
+
+            <InteractionLayer
+                onWavelengthChange={onWavelengthChange}
+            />
         </svg>
     );
 }

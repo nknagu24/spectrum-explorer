@@ -10,13 +10,7 @@ import {
 
 import { wavelengthToX } from "../graphics/scale";
 
-interface SpectrumBarProps {
-    onWavelengthChange?: (wavelength: number) => void;
-}
-
-export default function SpectrumBar({
-    onWavelengthChange,
-}: SpectrumBarProps) {
+export default function SpectrumBar() {
 
     const left = wavelengthToX(VISIBLE_MIN);
     const right = wavelengthToX(VISIBLE_MAX);
@@ -32,21 +26,6 @@ export default function SpectrumBar({
             fill="url(#spectrumGradient)"
             stroke="#666"
             strokeWidth={1.5}
-            onClick={(event) => {
-
-                const rect =
-                    event.currentTarget.getBoundingClientRect();
-
-                const fraction =
-                    (event.clientX - rect.left) / rect.width;
-
-                const wavelength =
-                    VISIBLE_MIN +
-                    fraction * (VISIBLE_MAX - VISIBLE_MIN);
-
-                onWavelengthChange?.(wavelength);
-
-            }}
         />
     );
 }
