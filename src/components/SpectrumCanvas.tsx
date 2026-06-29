@@ -5,6 +5,7 @@ import {
 
 import DrawingArea from "./DrawingArea";
 import WavelengthAxis from "./WavelengthAxis";
+import TickMarks from "./TickMarks";
 
 export default function SpectrumCanvas() {
     return (
@@ -25,6 +26,8 @@ export default function SpectrumCanvas() {
             <DrawingArea />
 
             <WavelengthAxis />
+
+            <TickMarks />
         </svg>
     );
 }
