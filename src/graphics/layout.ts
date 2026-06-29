@@ -39,3 +39,11 @@ export const MAX_WAVELENGTH = 1000;
 
 export const WAVELENGTH_AXIS_Y =
     TOP_MARGIN + DRAWING_HEIGHT + 20;
+
+/**
+* Visible spectrum bar
+*/
+
+export const SPECTRUM_BAR_Y = 95;
+
+export const SPECTRUM_BAR_HEIGHT = 28;

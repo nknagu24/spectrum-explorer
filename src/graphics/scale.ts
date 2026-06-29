@@ -21,3 +21,15 @@ export function wavelengthToX(
     );
 
 }
+
+
+
+export function wavelengthToPercent(
+    wavelength: number,
+): number {
+    return (
+        ((wavelength - MIN_WAVELENGTH) /
+            (MAX_WAVELENGTH - MIN_WAVELENGTH)) *
+        100
+    );
+}
