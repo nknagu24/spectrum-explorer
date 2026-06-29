@@ -8,8 +8,16 @@ import DrawingArea from "./DrawingArea";
 import WavelengthAxis from "./WavelengthAxis";
 import TickMarks from "./TickMarks";
 import SpectrumBar from "./SpectrumBar";
+import TickLabels from "./TickLabels";
+import Cursor from "./Cursor";
 
-export default function SpectrumCanvas() {
+interface SpectrumCanvasProps {
+    wavelength: number;
+}
+
+export default function SpectrumCanvas({
+    wavelength,
+}: SpectrumCanvasProps) {
     return (
         <svg
             className="spectrum-canvas"
@@ -30,9 +38,13 @@ export default function SpectrumCanvas() {
 
             <SpectrumBar />
 
+            <Cursor wavelength={wavelength} />
+
             <WavelengthAxis />
 
             <TickMarks />
+
+            <TickLabels />
         </svg>
     );
 }

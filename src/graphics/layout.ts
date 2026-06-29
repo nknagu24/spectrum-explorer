@@ -44,6 +44,14 @@ export const WAVELENGTH_AXIS_Y =
 * Visible spectrum bar
 */
 
-export const SPECTRUM_BAR_Y = 95;
-
 export const SPECTRUM_BAR_HEIGHT = 28;
+
+export const SPECTRUM_BAR_Y =
+    TOP_MARGIN +
+    (DRAWING_HEIGHT - SPECTRUM_BAR_HEIGHT) / 2;
+
+/**
+ * Tick label position
+ */
+
+export const TICK_LABEL_Y = WAVELENGTH_AXIS_Y + 24;

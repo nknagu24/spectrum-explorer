@@ -39,7 +39,9 @@ function App() {
         </label>
       </div>
 
-      <SpectrumCanvas />
+      <SpectrumCanvas
+        wavelength={wavelength}
+      />
 
       <PhotonReadout photon={photon} />
     </main>
