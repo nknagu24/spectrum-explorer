@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  background: #f7f8fa;
+  color: #222;
+}
+
+main {
+  width: min(1000px, 90%);
+  margin: 60px auto;
+}
+
+h1 {
+  margin-bottom: 0.3rem;
+}
+
+p {
+  color: #666;
+}
