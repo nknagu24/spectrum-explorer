@@ -1,23 +1,36 @@
+import { useState } from "react";
 import "./index.css";
 
 import { photonFromWavelength } from "./physics/photon";
 
 function App() {
-  const photon = photonFromWavelength(680);
+  const [wavelength, setWavelength] = useState(680);
+
+  const photon = photonFromWavelength(wavelength);
 
   return (
     <main>
       <h1>Spectrum Explorer</h1>
 
-      <h2>Photon Properties</h2>
+      <input
+        type="range"
+        min={250}
+        max={1000}
+        value={wavelength}
+        onChange={(e) => setWavelength(Number(e.target.value))}
+      />
+
+      <br />
+      <br />
+
+      <input
+        type="number"
+        value={wavelength}
+        onChange={(e) => setWavelength(Number(e.target.value))}
+      />
 
       <table>
         <tbody>
-          <tr>
-            <td>Wavelength</td>
-            <td>{photon.wavelengthNm.toFixed(1)} nm</td>
-          </tr>
-
           <tr>
             <td>Energy</td>
             <td>{photon.energyEV.toFixed(4)} eV</td>
@@ -31,11 +44,6 @@ function App() {
           <tr>
             <td>Wavenumber</td>
             <td>{photon.wavenumberCM.toFixed(1)} cm⁻¹</td>
-          </tr>
-
-          <tr>
-            <td>Momentum</td>
-            <td>{photon.momentum.toExponential(3)} kg·m/s</td>
           </tr>
         </tbody>
       </table>
