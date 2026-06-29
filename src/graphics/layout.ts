@@ -10,7 +10,7 @@
 
 
 export const SVG_WIDTH = 1000;
-export const SVG_HEIGHT = 180;
+export const SVG_HEIGHT = 250;
 
 /* Margins */
 
@@ -39,7 +39,7 @@ export const MAX_WAVELENGTH = 1000;
  */
 
 export const WAVELENGTH_AXIS_Y =
-    TOP_MARGIN + DRAWING_HEIGHT + 12;
+    TOP_MARGIN + DRAWING_HEIGHT - 2;
 
 /**
 * Visible spectrum bar

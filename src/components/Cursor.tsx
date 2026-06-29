@@ -1,4 +1,5 @@
 import { wavelengthToX } from "../graphics/scale";
+
 import {
     TOP_MARGIN,
     DRAWING_HEIGHT,
@@ -11,27 +12,44 @@ interface CursorProps {
 export default function Cursor({
     wavelength,
 }: CursorProps) {
-    const x = wavelengthToX(wavelength);
+
+    const x =
+        wavelengthToX(wavelength);
 
     return (
-        <>
+
+        <g
+            transform={`translate(${x},0)`}
+            style={{
+                transition:
+                    "transform 120ms ease-out",
+            }}
+        >
+
+            {/* Cursor Line */}
+
             <line
-                x1={x}
+                x1={0}
                 y1={TOP_MARGIN}
-                x2={x}
+                x2={0}
                 y2={TOP_MARGIN + DRAWING_HEIGHT}
-                stroke="#222"
-                strokeWidth={2}
+                stroke="#6b7280"
+                strokeWidth={1.5}
             />
+
+            {/* Cursor Pointer */}
 
             <polygon
                 points={`
-        ${x - 6},${TOP_MARGIN - 2}
-        ${x + 6},${TOP_MARGIN - 2}
-        ${x},${TOP_MARGIN + 8}
-      `}
-                fill="#222"
+                    -6,${TOP_MARGIN - 2}
+                     6,${TOP_MARGIN - 2}
+                     0,${TOP_MARGIN + 8}
+                `}
+                fill="#6b7280"
             />
-        </>
+
+        </g>
+
     );
+
 }

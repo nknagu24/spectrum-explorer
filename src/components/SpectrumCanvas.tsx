@@ -10,6 +10,8 @@ import TickMarks from "./TickMarks";
 import SpectrumBar from "./SpectrumBar";
 import TickLabels from "./TickLabels";
 import Cursor from "./Cursor";
+import SpectrumRegions from "./SpectrumRegions";
+import RegionLabels from "./RegionLabels";
 
 interface SpectrumCanvasProps {
     wavelength: number;
@@ -37,6 +39,10 @@ export default function SpectrumCanvas({
                 strokeWidth={1}
             />
             <DrawingArea />
+
+            <SpectrumRegions />
+
+            <RegionLabels />
 
             <SpectrumBar
                 onWavelengthChange={onWavelengthChange}
