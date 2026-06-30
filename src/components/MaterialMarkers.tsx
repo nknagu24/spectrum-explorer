@@ -48,6 +48,17 @@ export default function MaterialMarkers({
                             wavelength,
                         );
 
+                    const labelLevel =
+                        material.labelLevel ?? 0;
+
+                    const labelY =
+                        SPECTRUM_BAR_Y - 55 -
+                        labelLevel * 18;
+
+                    const lineTopY =
+                        SPECTRUM_BAR_Y - 45 -
+                        labelLevel * 18;
+
                     return (
 
                         <g
@@ -62,7 +73,7 @@ export default function MaterialMarkers({
 
                             <line
                                 x1={x}
-                                y1={SPECTRUM_BAR_Y - 45}
+                                y1={lineTopY}
                                 x2={x}
                                 y2={SPECTRUM_BAR_Y - 2}
 
@@ -75,7 +86,7 @@ export default function MaterialMarkers({
 
                             <text
                                 x={x}
-                                y={SPECTRUM_BAR_Y - 55}
+                                y={labelY}
 
                                 textAnchor="middle"
 

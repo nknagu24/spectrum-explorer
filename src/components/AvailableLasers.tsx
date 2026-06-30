@@ -3,7 +3,7 @@ import { LASERS } from "../data/lasers/lasers";
 import type { Laser } from "../types/laser";
 import type { LaserCategory } from "../types/laserCategory";
 
-interface AvailableSourcesProps {
+interface AvailableLasersProps {
 
     category: LaserCategory;
 
@@ -15,7 +15,7 @@ interface AvailableSourcesProps {
 
 }
 
-export default function AvailableSources({
+export default function AvailableLasers({
 
     category,
 
@@ -23,7 +23,7 @@ export default function AvailableSources({
 
     onLaserSelect,
 
-}: AvailableSourcesProps) {
+}: AvailableLasersProps) {
 
     const lasers = LASERS.filter(
 
@@ -33,9 +33,9 @@ export default function AvailableSources({
 
     return (
 
-        <div className="available-sources">
+        <div className="available-lasers">
 
-            <h2>Available Sources</h2>
+            <h2>Available Lasers</h2>
 
             <div className="source-list">
 

@@ -144,11 +144,9 @@ export default function OverlayPanel({
                     checked={showMaterials}
 
                     onChange={(event) =>
-
                         onShowMaterialsChange(
                             event.target.checked,
                         )
-
                     }
 
                 />
@@ -158,95 +156,46 @@ export default function OverlayPanel({
             </label>
             {showMaterials && (
 
-                <div className="material-category-list">
+                <div className="segmented-control">
 
-                    <label className="material-option">
-
-                        <input
-                            type="radio"
-
-                            name="material-category"
-
-                            checked={
-                                materialCategory === "tmd"
-                            }
-
-                            onChange={() =>
-                                onMaterialCategoryChange(
-                                    "tmd",
-                                )
-                            }
-                        />
-
+                    <button
+                        className={
+                            materialCategory === "tmd"
+                                ? "segment active"
+                                : "segment"
+                        }
+                        onClick={() =>
+                            onMaterialCategoryChange("tmd")
+                        }
+                    >
                         TMDs
+                    </button>
 
-                    </label>
+                    <button
+                        className={
+                            materialCategory === "iii-v"
+                                ? "segment active"
+                                : "segment"
+                        }
+                        onClick={() =>
+                            onMaterialCategoryChange("iii-v")
+                        }
+                    >
+                        III-V
+                    </button>
 
-                    <label className="material-option">
-
-                        <input
-                            type="radio"
-
-                            name="material-category"
-
-                            checked={
-                                materialCategory === "perovskite"
-                            }
-
-                            onChange={() =>
-                                onMaterialCategoryChange(
-                                    "perovskite",
-                                )
-                            }
-                        />
-
+                    <button
+                        className={
+                            materialCategory === "perovskite"
+                                ? "segment active"
+                                : "segment"
+                        }
+                        onClick={() =>
+                            onMaterialCategoryChange("perovskite")
+                        }
+                    >
                         Perovskites
-
-                    </label>
-
-                    <label className="material-option">
-
-                        <input
-                            type="radio"
-
-                            name="material-category"
-
-                            checked={
-                                materialCategory === "semiconductor"
-                            }
-
-                            onChange={() =>
-                                onMaterialCategoryChange(
-                                    "semiconductor",
-                                )
-                            }
-                        />
-
-                        Semiconductors
-
-                    </label>
-
-                    <label className="material-option">
-
-                        <input
-                            type="radio"
-
-                            name="material-category"
-
-                            checked={
-                                materialCategory === "other2d"
-                            }
-
-                            onChange={() =>
-                                onMaterialCategoryChange(
-                                    "other2d",
-                                )
-                            }
-                        />
-
-                        Other 2D
-
-                    </label>
+                    </button>
 
                 </div>
 

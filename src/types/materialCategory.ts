@@ -1,9 +1,9 @@
 export type MaterialCategory =
-
     | "tmd"
-
+    | "iii-v"
+    | "group-iv"
+    | "ii-vi"
     | "perovskite"
-
-    | "semiconductor"
-
-    | "other2d";
+    | "oxide"
+    | "organic"
+    | "2d-other";
