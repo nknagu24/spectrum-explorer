@@ -156,46 +156,67 @@ export default function OverlayPanel({
             </label>
             {showMaterials && (
 
-                <div className="segmented-control">
+                <div className="material-category-list">
 
-                    <button
-                        className={
-                            materialCategory === "tmd"
-                                ? "segment active"
-                                : "segment"
-                        }
-                        onClick={() =>
-                            onMaterialCategoryChange("tmd")
-                        }
-                    >
+                    <label className="material-option">
+
+                        <input
+                            type="radio"
+                            name="material-category"
+                            checked={materialCategory === "tmd"}
+                            onChange={() =>
+                                onMaterialCategoryChange("tmd")
+                            }
+                        />
+
                         TMDs
-                    </button>
 
-                    <button
-                        className={
-                            materialCategory === "iii-v"
-                                ? "segment active"
-                                : "segment"
-                        }
-                        onClick={() =>
-                            onMaterialCategoryChange("iii-v")
-                        }
-                    >
+                    </label>
+
+                    <label className="material-option">
+
+                        <input
+                            type="radio"
+                            name="material-category"
+                            checked={materialCategory === "iii-v"}
+                            onChange={() =>
+                                onMaterialCategoryChange("iii-v")
+                            }
+                        />
+
                         III-V
-                    </button>
 
-                    <button
-                        className={
-                            materialCategory === "perovskite"
-                                ? "segment active"
-                                : "segment"
-                        }
-                        onClick={() =>
-                            onMaterialCategoryChange("perovskite")
-                        }
-                    >
+                    </label>
+
+                    <label className="material-option">
+
+                        <input
+                            type="radio"
+                            name="material-category"
+                            checked={materialCategory === "perovskite"}
+                            onChange={() =>
+                                onMaterialCategoryChange("perovskite")
+                            }
+                        />
+
                         Perovskites
-                    </button>
+
+                    </label>
+
+                    <label className="material-option">
+
+                        <input
+                            type="radio"
+                            name="material-category"
+                            checked={materialCategory === "group-iv"}
+                            onChange={() =>
+                                onMaterialCategoryChange("group-iv")
+                            }
+                        />
+
+                        Group-IV
+
+                    </label>
 
                 </div>
 

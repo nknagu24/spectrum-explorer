@@ -16,11 +16,6 @@ export default function WhyItMatters({
 
         <section>
 
-            <h3>
-
-                Why It Matters
-
-            </h3>
 
             <ul>
 

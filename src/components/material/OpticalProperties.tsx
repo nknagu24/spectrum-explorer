@@ -19,11 +19,7 @@ export default function OpticalProperties({
 
         <section>
 
-            <h3>
 
-                Optical Properties
-
-            </h3>
 
             <div className="property">
 

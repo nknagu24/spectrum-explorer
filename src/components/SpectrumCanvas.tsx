@@ -71,8 +71,8 @@ export default function SpectrumCanvas({
                 height={SVG_HEIGHT}
                 rx={12}
                 fill="white"
-                stroke="#d9d9d9"
-                strokeWidth={1}
+                stroke="#c25454"
+                strokeWidth={2}
             />
             <DrawingArea />
 

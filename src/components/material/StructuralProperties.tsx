@@ -19,11 +19,7 @@ export default function StructuralProperties({
 
         <section>
 
-            <h3>
 
-                Structural Properties
-
-            </h3>
 
             {structural.crystalSystem && (
 

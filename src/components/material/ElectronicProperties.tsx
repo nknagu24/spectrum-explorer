@@ -19,11 +19,6 @@ export default function ElectronicProperties({
 
         <section>
 
-            <h3>
-
-                Electronic Properties
-
-            </h3>
 
             {electronic.electronAffinityEV && (
 

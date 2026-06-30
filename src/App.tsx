@@ -3,7 +3,7 @@ import "./index.css";
 
 import type { InputMode } from "./types/inputMode";
 import { photonFromWavelength } from "./physics/photon";
-
+import WelcomeCard from "./components/WelcomeCard";
 import PhotonReadout from "./components/PhotonReadout";
 import SpectrumCanvas from "./components/SpectrumCanvas";
 import SelectionPanel from "./components/SelectionPanel";
@@ -413,9 +413,18 @@ function App() {
 
               </button>
 
+
             </div>
 
           )}
+
+
+          {activePanel === null && (
+
+            <WelcomeCard />
+
+          )}
+
           {activePanel === "laser" &&
             selectedLaser && (
 

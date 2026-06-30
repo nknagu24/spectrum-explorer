@@ -11,7 +11,7 @@ export default function TickLabels() {
                     x={wavelengthToX(tick)}
                     y={TICK_LABEL_Y}
                     textAnchor="middle"
-                    fontSize={14}
+                    fontSize={20}
                     fill="#444"
                 >
                     {tick}

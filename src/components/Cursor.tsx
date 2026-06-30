@@ -30,9 +30,9 @@ export default function Cursor({
 
             <line
                 x1={0}
-                y1={TOP_MARGIN}
+                y1={TOP_MARGIN + 40}
                 x2={0}
-                y2={TOP_MARGIN + DRAWING_HEIGHT}
+                y2={TOP_MARGIN + DRAWING_HEIGHT - 30}
                 stroke="#6b7280"
                 strokeWidth={1.5}
             />

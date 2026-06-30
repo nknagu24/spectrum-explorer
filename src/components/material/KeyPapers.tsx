@@ -16,11 +16,7 @@ export default function KeyPapers({
 
         <section>
 
-            <h3>
 
-                Key Papers
-
-            </h3>
 
             <ul>
 

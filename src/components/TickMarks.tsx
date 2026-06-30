@@ -11,9 +11,9 @@ export default function TickMarks() {
                     x1={wavelengthToX(tick)}
                     y1={WAVELENGTH_AXIS_Y}
                     x2={wavelengthToX(tick)}
-                    y2={WAVELENGTH_AXIS_Y + 8}
+                    y2={WAVELENGTH_AXIS_Y - 10}
                     stroke="#444"
-                    strokeWidth={2}
+                    strokeWidth={3}
                 />
             ))}
         </>
