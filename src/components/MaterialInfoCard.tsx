@@ -1,5 +1,30 @@
 import type { Material } from "../types/material";
 
+
+import OpticalProperties
+    from "./material/OpticalProperties";
+
+
+import ElectronicProperties
+    from "./material/ElectronicProperties";
+
+
+import MaterialOverview
+    from "./material/MaterialOverview";
+
+
+import StructuralProperties
+    from "./material/StructuralProperties";
+
+
+import WhyItMatters
+    from "./material/WhyItMatters";
+
+
+import KeyPapers
+    from "./material/KeyPapers";
+
+
 interface MaterialInfoCardProps {
 
     material: Material;
@@ -16,36 +41,31 @@ export default function MaterialInfoCard({
 
         <div className="material-card">
 
-            <h2>
+            <MaterialOverview
+                material={material}
+            />
 
-                {material.name}
+            <OpticalProperties
+                material={material}
+            />
+            <ElectronicProperties
+                material={material}
+            />
 
-            </h2>
+            <StructuralProperties
+                material={material}
+            />
 
-            <p>
+            <WhyItMatters
+                material={material}
+            />
 
-                <strong>Formula:</strong>{" "}
 
-                {material.formula}
+            <KeyPapers
+                material={material}
+            />
 
-            </p>
 
-            <p>
-
-                <strong>Crystal Structure:</strong>{" "}
-
-                {material.crystalStructure}
-
-            </p>
-
-            <p>
-
-                <strong>Bandgap:</strong>{" "}
-
-                {material.bandgapEV.toFixed(2)} eV {" "}
-                ({material.bandgapType})
-
-            </p>
 
         </div>
 

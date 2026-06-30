@@ -117,13 +117,6 @@ export interface Material {
 
     };
 
-    /* ======================================================
-       Applications
-       ====================================================== */
-
-    everydayApplications: Application[];
-
-    futureApplications: Application[];
 
     /* ======================================================
        Literature
@@ -134,7 +127,6 @@ export interface Material {
     /* ======================================================
        Miscellaneous
        ====================================================== */
-
-    didYouKnow: string[];
+    whyItMatters: string[];
 
 }

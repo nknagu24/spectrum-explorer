@@ -11,6 +11,7 @@ export const MOS2: Material = {
     symbol: "MoS₂",
 
     formula: "MoS₂",
+
     category: "tmd",
 
 
@@ -107,41 +108,18 @@ export const MOS2: Material = {
        Applications
        ====================================================== */
 
-    everydayApplications: [
+    whyItMatters: [
 
-        {
-            title: "Photodetectors",
+        "Monolayer MoS₂ is one of the first atomically thin semiconductors with a direct bandgap, making it a model system for valleytronics and exciton physics.",
 
-            description:
-                "Strong light-matter interaction enables highly sensitive ultrathin photodetectors.",
-        },
+        "Every atom in a monolayer lies at the surface, giving MoS₂ exceptional sensitivity for chemical and biological sensing.",
 
-        {
-            title: "Chemical & Gas Sensors",
-
-            description:
-                "Large surface-to-volume ratio makes monolayer MoS₂ highly sensitive to adsorbed molecules.",
-        },
+        "Its atomically thin body suppresses short-channel effects, making it a promising material for future ultra-scaled transistors."
 
     ],
 
-    futureApplications: [
 
-        {
-            title: "Valleytronics",
 
-            description:
-                "Valley-selective optical transitions make MoS₂ a leading platform for valley-based information processing.",
-        },
-
-        {
-            title: "Flexible Electronics",
-
-            description:
-                "Atomically thin structure enables mechanically flexible electronic and optoelectronic devices.",
-        },
-
-    ],
 
     /* ======================================================
        Literature
@@ -183,14 +161,6 @@ export const MOS2: Material = {
        Miscellaneous
        ====================================================== */
 
-    didYouKnow: [
 
-        "Monolayer MoS₂ changes from an indirect to a direct bandgap semiconductor.",
-
-        "A monolayer of MoS₂ is approximately 0.65 nm thick.",
-
-        "The A and B excitons originate from spin-orbit splitting of the valence band.",
-
-    ],
 
 };

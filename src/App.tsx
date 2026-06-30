@@ -24,6 +24,15 @@ import {
   energyToWavelength,
 } from "./physics/conversions";
 
+import type { Material }
+  from "./types/material";
+import AvailableMaterials
+  from "./components/AvailableMaterials";
+
+import MaterialInfoCard
+  from "./components/MaterialInfoCard";
+
+
 
 function App() {
   /* ==========================================================
@@ -47,17 +56,26 @@ function App() {
   const [selectedLaser, setSelectedLaser] =
     useState<Laser | null>(null);
 
+  const [selectedMaterial, setSelectedMaterial] =
+    useState<Material | null>(null);
+
   const [showMaterials, setShowMaterials] =
     useState(false);
 
   const [materialCategory, setMaterialCategory] =
     useState<MaterialCategory>("tmd");
+
+
+  const [activePanel, setActivePanel] =
+    useState<"laser" | "material" | null>(null);
+
+
+
   /* ==========================================================
    * Derived Data
    * ========================================================== */
 
   const photon = photonFromWavelength(wavelength);
-
 
 
   useEffect(() => {
@@ -81,6 +99,8 @@ function App() {
     photon.energyEV,
     inputMode,
   ]);
+
+
   useEffect(() => {
 
     setSelectedLaser(
@@ -92,11 +112,21 @@ function App() {
 
     );
 
+    if (showLasers && activePanel === null) {
+
+      setActivePanel("laser");
+
+    }
+
   }, [
 
     wavelength,
 
     laserCategory,
+
+    showLasers,
+
+    activePanel,
 
   ]);
   /* ==========================================================
@@ -105,7 +135,7 @@ function App() {
   function handleLaserSelect(
     laser: Laser,
   ) {
-
+    setActivePanel("laser");
     setSelectedLaser(laser);
 
     if (
@@ -122,11 +152,15 @@ function App() {
   }
 
 
-  import type { Material } from "./types/material";
+
 
   function handleMaterialSelect(
     material: Material,
   ) {
+    setActivePanel("material");
+    setSelectedMaterial(
+      material,
+    );
 
     const wavelength =
       energyToWavelength(
@@ -227,21 +261,34 @@ function App() {
           />
 
         </div>
-        {showLasers && selectedLaser && (
+        <div className="card information-card">
 
-          <div className="card laser-info-card">
+          {activePanel === "laser" &&
+            selectedLaser && (
 
-            <LaserInfoCard
-              laser={selectedLaser}
-            />
+              <LaserInfoCard
+                laser={selectedLaser}
+              />
 
-          </div>
+            )}
 
-        )}
+          {activePanel === "material" &&
+            selectedMaterial && (
+
+              <MaterialInfoCard
+                material={selectedMaterial}
+              />
+
+            )}
+
+        </div>
+
       </div>
+
+
       {showLasers && (
 
-        <div className="card available-sources-card">
+        <div className="card available-lasers-card">
 
           <AvailableLasers
 
@@ -257,6 +304,23 @@ function App() {
 
       )}
 
+      {showMaterials && (
+
+        <div className="card available-materials-card">
+
+          <AvailableMaterials
+
+            category={materialCategory}
+
+            selectedMaterial={selectedMaterial}
+
+            onMaterialSelect={handleMaterialSelect}
+
+          />
+
+        </div>
+
+      )}
 
 
     </main>

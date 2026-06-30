@@ -367,10 +367,10 @@ p {
 }
 
 /* ==========================================================
-   Available Sources
+   Available Lasers
    ========================================================== */
 
-.available-sources {
+.available-lasers {
 
   display: flex;
 
@@ -549,5 +549,18 @@ p {
 .material-option input {
 
   margin: 0;
+
+}
+
+.available-materials-card {
+
+  margin-top: 24px;
+
+}
+
+
+.material-info-card {
+
+  align-self: start;
 
 }
