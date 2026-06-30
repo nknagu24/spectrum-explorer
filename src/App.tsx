@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import "./index.css";
 
-import {
-  inputToWavelength,
-} from "./physics/conversions";
-
 import type { InputMode } from "./types/inputMode";
 import { photonFromWavelength } from "./physics/photon";
 
@@ -18,8 +14,15 @@ import type { LaserCategory }
 import { findNearestLaser }
   from "./data/lasers/findNearestLaser";
 import LaserInfoCard from "./components/LaserInfoCard";
-import AvailableSources from "./components/AvailableSources";
+import AvailableLasers from "./components/AvailableLasers";
 import type { Laser } from "./types/laser";
+import type { MaterialCategory }
+  from "./types/materialCategory";
+
+import {
+  inputToWavelength,
+  energyToWavelength,
+} from "./physics/conversions";
 
 
 function App() {
@@ -44,6 +47,11 @@ function App() {
   const [selectedLaser, setSelectedLaser] =
     useState<Laser | null>(null);
 
+  const [showMaterials, setShowMaterials] =
+    useState(false);
+
+  const [materialCategory, setMaterialCategory] =
+    useState<MaterialCategory>("tmd");
   /* ==========================================================
    * Derived Data
    * ========================================================== */
@@ -51,11 +59,6 @@ function App() {
   const photon = photonFromWavelength(wavelength);
 
 
-  const nearestLaser =
-    findNearestLaser(
-      wavelength,
-      laserCategory,
-    );
 
   useEffect(() => {
 
@@ -118,6 +121,31 @@ function App() {
 
   }
 
+
+  import type { Material } from "./types/material";
+
+  function handleMaterialSelect(
+    material: Material,
+  ) {
+
+    const wavelength =
+      energyToWavelength(
+        material.bandgapEV,
+      );
+
+    if (
+      wavelength >= 250 &&
+      wavelength <= 1000
+    ) {
+
+      setWavelength(
+        wavelength,
+      );
+
+    }
+
+  }
+
   function commitInput() {
 
     const value = Number(inputText);
@@ -140,12 +168,6 @@ function App() {
 
   return (
     <main>
-      <h1>Spectrum Explorer</h1>
-
-      <p>
-        Interactive spectroscopy tools for
-        researchers.
-      </p>
 
       <div className="top-panel">
 
@@ -174,18 +196,20 @@ function App() {
         </div>
       </div>
 
-      <div className="card spectrum-card">
 
-        <h2>Visible Spectrum</h2>
 
-        <SpectrumCanvas
-          wavelength={wavelength}
-          showLasers={showLasers}
-          laserCategory={laserCategory}
-          onWavelengthChange={setWavelength}
-        />
+      <SpectrumCanvas
+        wavelength={wavelength}
 
-      </div>
+        showLasers={showLasers}
+        laserCategory={laserCategory}
+
+        showMaterials={showMaterials}
+        materialCategory={materialCategory}
+
+        onWavelengthChange={setWavelength}
+      />
+
       <div className="bottom-panel">
 
         <div className="card overlay-card">
@@ -195,6 +219,11 @@ function App() {
             laserCategory={laserCategory}
             onShowLasersChange={setShowLasers}
             onLaserCategoryChange={setLaserCategory}
+
+            showMaterials={showMaterials}
+            materialCategory={materialCategory}
+            onShowMaterialsChange={setShowMaterials}
+            onMaterialCategoryChange={setMaterialCategory}
           />
 
         </div>
@@ -214,7 +243,7 @@ function App() {
 
         <div className="card available-sources-card">
 
-          <AvailableSources
+          <AvailableLasers
 
             category={laserCategory}
 
@@ -227,6 +256,8 @@ function App() {
         </div>
 
       )}
+
+
 
     </main>
   );

@@ -404,7 +404,10 @@ p {
 
   font-size: 0.9rem;
 
-  transition: 0.2s;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 
 }
 
@@ -423,5 +426,128 @@ p {
   border-color: #2563eb;
 
   font-weight: 600;
+
+}
+
+.source-chip:focus-visible {
+
+  outline: none;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.2);
+
+}
+
+/* ==========================================================
+   Small Screens
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+  main {
+
+    width: 95%;
+
+    margin: 24px auto 40px;
+
+  }
+
+  .card {
+
+    padding: 16px;
+
+  }
+
+  h1 {
+
+    font-size: 1.75rem;
+
+  }
+
+  .source-chip {
+
+    padding: 10px 16px;
+
+  }
+
+}
+
+/* ==========================================================
+   Material Information
+   ========================================================== */
+
+.material-card {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+}
+
+.material-card h2 {
+
+  margin: 0;
+
+  color: #111827;
+
+}
+
+.material-card p {
+
+  margin: 0;
+
+  color: #374151;
+
+}
+
+.overlay-divider {
+
+  margin: 20px 0;
+
+  border: none;
+
+  border-top: 1px solid #e5e7eb;
+
+}
+
+/* ==========================================================
+   Material Categories
+   ========================================================== */
+
+.material-category-list {
+
+  margin-top: 12px;
+
+  margin-left: 28px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+}
+
+.material-option {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+
+  font-size: 0.95rem;
+
+  color: #374151;
+
+}
+
+.material-option input {
+
+  margin: 0;
 
 }

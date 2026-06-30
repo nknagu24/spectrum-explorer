@@ -15,6 +15,15 @@ import RegionLabels from "./RegionLabels";
 import InteractionLayer from "./InteractionLayer";
 import LaserMarkers from "./LaserMarkers";
 import type { LaserCategory } from "../types/laserCategory";
+import type { MaterialCategory }
+    from "../types/materialCategory";
+import MaterialMarkers
+    from "./MaterialMarkers";
+import {
+    energyToWavelength,
+} from "../physics/conversions";
+
+
 
 interface SpectrumCanvasProps {
 
@@ -23,6 +32,10 @@ interface SpectrumCanvasProps {
     showLasers: boolean;
 
     laserCategory: LaserCategory;
+
+    showMaterials: boolean;
+
+    materialCategory: MaterialCategory;
 
     onWavelengthChange: (
         wavelength: number,
@@ -37,6 +50,10 @@ export default function SpectrumCanvas({
     showLasers,
 
     laserCategory,
+
+    showMaterials,
+
+    materialCategory,
 
     onWavelengthChange,
 
@@ -78,6 +95,27 @@ export default function SpectrumCanvas({
                 />
 
             )}
+
+            {showMaterials && (
+
+                <MaterialMarkers
+
+                    category={materialCategory}
+
+                    onBandgapSelect={(bandgapEV) =>
+
+                        onWavelengthChange(
+                            energyToWavelength(
+                                bandgapEV,
+                            ),
+                        )
+
+                    }
+
+                />
+
+            )}
+
             <Cursor wavelength={wavelength} />
 
             <WavelengthAxis />

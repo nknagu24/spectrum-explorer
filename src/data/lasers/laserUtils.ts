@@ -1,4 +1,4 @@
-import { LASERS } from "./lasers/lasers";
+import { LASERS } from "./lasers";
 
 export function findNearestLaser(
     wavelength: number,
