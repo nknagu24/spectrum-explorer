@@ -24,6 +24,9 @@ import WhyItMatters
 import KeyPapers
     from "./material/KeyPapers";
 
+import CollapsibleSection
+    from "./material/CollapsibleSection";
+
 
 interface MaterialInfoCardProps {
 
@@ -41,29 +44,65 @@ export default function MaterialInfoCard({
 
         <div className="material-card">
 
-            <MaterialOverview
-                material={material}
-            />
-
-            <OpticalProperties
-                material={material}
-            />
-            <ElectronicProperties
-                material={material}
-            />
-
-            <StructuralProperties
-                material={material}
-            />
-
-            <WhyItMatters
-                material={material}
-            />
+            <MaterialOverview material={material} />
 
 
-            <KeyPapers
-                material={material}
-            />
+            <p className="property-basis">
+
+                *Properties correspond to{" "}
+                {material.propertyBasis.toLowerCase()}.
+
+            </p>
+
+            <CollapsibleSection
+                title="Optical Properties"
+            >
+
+                <OpticalProperties
+                    material={material}
+                />
+
+            </CollapsibleSection>
+
+            <CollapsibleSection
+                title="Electronic Properties"
+            >
+
+                <ElectronicProperties
+                    material={material}
+                />
+
+            </CollapsibleSection>
+
+            <CollapsibleSection
+                title="Structural Properties"
+            >
+
+                <StructuralProperties
+                    material={material}
+                />
+
+            </CollapsibleSection>
+
+            <CollapsibleSection
+                title="Why It Matters"
+            >
+
+                <WhyItMatters
+                    material={material}
+                />
+
+            </CollapsibleSection>
+
+            <CollapsibleSection
+                title="Key Papers"
+            >
+
+                <KeyPapers
+                    material={material}
+                />
+
+            </CollapsibleSection>
 
 
 

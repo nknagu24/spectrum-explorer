@@ -25,6 +25,9 @@ export const MOS2: Material = {
 
     bandgapType: "Direct",
 
+
+
+    propertyBasis: "Monolayer",
     /* ======================================================
        Optical Properties
        ====================================================== */

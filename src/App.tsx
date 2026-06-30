@@ -32,7 +32,8 @@ import AvailableMaterials
 import MaterialInfoCard
   from "./components/MaterialInfoCard";
 
-
+import { findNearestMaterial }
+  from "./data/materials/findNearestMaterial";
 
 function App() {
   /* ==========================================================
@@ -112,7 +113,18 @@ function App() {
 
     );
 
-    if (showLasers && activePanel === null) {
+  }, [
+
+    wavelength,
+
+    laserCategory,
+
+  ]);
+
+
+  useEffect(() => {
+
+    if (showLasers) {
 
       setActivePanel("laser");
 
@@ -120,13 +132,112 @@ function App() {
 
   }, [
 
-    wavelength,
+    showLasers,
 
-    laserCategory,
+  ]);
+
+  useEffect(() => {
+
+    if (
+
+      !showMaterials &&
+
+      activePanel === "material"
+
+    ) {
+
+      if (showLasers) {
+
+        setActivePanel("laser");
+
+      } else {
+
+        setActivePanel(null);
+
+      }
+
+    }
+
+  }, [
+
+    showMaterials,
 
     showLasers,
 
     activePanel,
+
+  ]);
+
+
+  useEffect(() => {
+
+    if (
+
+      !showLasers &&
+
+      activePanel === "laser"
+
+    ) {
+
+      if (showMaterials) {
+
+        setActivePanel("material");
+
+      } else {
+
+        setActivePanel(null);
+
+      }
+
+    }
+
+  }, [
+
+    showLasers,
+
+    showMaterials,
+
+    activePanel,
+
+  ]);
+
+
+
+  useEffect(() => {
+
+    if (showMaterials) {
+
+      setActivePanel("material");
+
+    }
+
+  }, [
+
+    showMaterials,
+
+  ]);
+
+
+
+  useEffect(() => {
+
+    setSelectedMaterial(
+
+      findNearestMaterial(
+
+        wavelength,
+
+        materialCategory,
+
+      )
+
+    );
+
+  }, [
+
+    wavelength,
+
+    materialCategory,
 
   ]);
   /* ==========================================================
@@ -262,7 +373,49 @@ function App() {
 
         </div>
         <div className="card information-card">
+          {showLasers && showMaterials && (
 
+            <div className="information-toggle">
+
+              <button
+
+                className={
+                  activePanel === "laser"
+                    ? "toggle-button active"
+                    : "toggle-button"
+                }
+
+                onClick={() =>
+                  setActivePanel("laser")
+                }
+
+              >
+
+                Laser
+
+              </button>
+
+              <button
+
+                className={
+                  activePanel === "material"
+                    ? "toggle-button active"
+                    : "toggle-button"
+                }
+
+                onClick={() =>
+                  setActivePanel("material")
+                }
+
+              >
+
+                Material
+
+              </button>
+
+            </div>
+
+          )}
           {activePanel === "laser" &&
             selectedLaser && (
 

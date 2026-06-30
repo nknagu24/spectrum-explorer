@@ -1,11 +1,17 @@
 import { MATERIALS } from "./materials";
 
-import type { Material } from "../../types/material";
-import type { MaterialCategory } from "../../types/materialCategory";
+import { energyToWavelength }
+    from "../../physics/conversions";
+
+import type { Material }
+    from "../../types/material";
+
+import type { MaterialCategory }
+    from "../../types/materialCategory";
 
 export function findNearestMaterial(
 
-    bandgapEV: number,
+    wavelength: number,
 
     category: MaterialCategory,
 
@@ -13,20 +19,40 @@ export function findNearestMaterial(
 
     const materials = MATERIALS.filter(
 
-        material => material.category === category,
+        material =>
+            material.category === category,
 
     );
 
     return materials.reduce(
 
-        (closest, material) =>
+        (nearest, material) => {
 
-            Math.abs(material.bandgapEV - bandgapEV) <
-                Math.abs(closest.bandgapEV - bandgapEV)
+            const nearestWavelength =
+                energyToWavelength(
+                    nearest.bandgapEV,
+                );
+
+            const materialWavelength =
+                energyToWavelength(
+                    material.bandgapEV,
+                );
+
+            return Math.abs(
+                materialWavelength -
+                wavelength,
+            ) <
+
+                Math.abs(
+                    nearestWavelength -
+                    wavelength,
+                )
 
                 ? material
 
-                : closest,
+                : nearest;
+
+        },
 
     );
 

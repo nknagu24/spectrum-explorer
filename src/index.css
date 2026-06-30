@@ -564,3 +564,99 @@ p {
   align-self: start;
 
 }
+
+
+
+/* ==========================================================
+   Collapsible Sections
+   ========================================================== */
+
+.collapsible-section {
+
+  margin-top: 16px;
+
+}
+
+.collapsible-header {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0;
+
+  border: none;
+
+  background: none;
+
+  font: inherit;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  text-align: left;
+
+}
+
+.collapsible-content {
+
+  margin-top: 10px;
+
+  margin-left: 18px;
+
+}
+
+
+.information-toggle {
+
+  display: flex;
+
+  gap: 8px;
+
+  margin-bottom: 16px;
+
+}
+
+.toggle-button {
+
+  padding: 6px 12px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 6px;
+
+  background: white;
+
+  cursor: pointer;
+
+}
+
+.toggle-button.active {
+
+  background: #2563eb;
+
+  color: white;
+
+  border-color: #2563eb;
+
+}
+
+
+.property-basis {
+
+  font-size: 0.85rem;
+
+  color: #666;
+
+  font-style: italic;
+
+  margin-top: -4px;
+
+  margin-bottom: 12px;
+
+}
