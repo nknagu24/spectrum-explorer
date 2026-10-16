@@ -43,6 +43,19 @@
 .legacy-spectrum-table th { font-weight: 600; border-bottom: 1px solid #888; }
 .legacy-spectrum-table th, .legacy-spectrum-table td { padding: 9px 12px; vertical-align: top; white-space: nowrap; }
 .legacy-spectrum-table tbody tr:nth-child(even) { background: #f5f5f5; }
+.legacy-spectrum-table .spectrum-group-start > * { border-top: 2px solid #b8b8b8; }
+.legacy-spectrum-table .spectrum-group-start:first-child > * { border-top: 0; }
+.legacy-spectrum-table .spectrum-range-label {
+  min-width: 125px;
+  vertical-align: middle;
+  text-align: left;
+  font-size: .98rem;
+  border-right: 1px solid #ddd;
+}
+.legacy-spectrum-table .spectrum-ultraviolet .spectrum-range-label { background: #f0eafa; }
+.legacy-spectrum-table .spectrum-visible .spectrum-range-label { background: #edf5e9; }
+.legacy-spectrum-table .spectrum-infrared .spectrum-range-label { background: #f9eee2; }
+.legacy-spectrum-table tbody tr.spectrum-group-start { background: #fafafa; }
 @media (max-width: 700px) {
   .legacy-interface { margin-top: 20px; }
   .legacy-converter { grid-template-columns: 1fr; }
