@@ -1,4 +1,7 @@
-/* Minimal, content-first Legacy UI */
+/* ==========================================================
+   Legacy Interface
+   ========================================================== */
+
 .legacy-interface {
   width: min(1120px, 100%);
   margin: 28px auto 56px;
@@ -7,14 +10,30 @@
   line-height: 1.55;
 }
 
-.legacy-intro {
+/* ==========================================================
+   Introduction
+   ========================================================== */
+
+.legacy-interface .legacy-intro {
+  background: #f7f8fa;
+  color: #171717;
+  padding: 24px 0;
   margin-bottom: 36px;
 }
 
-.legacy-interface h1 {
+.legacy-interface .legacy-intro h1 {
   margin: 0 0 14px;
+  color: #171717;
+  background: transparent;
   font-size: 1.8rem;
   font-weight: 600;
+  line-height: 1.4;
+}
+
+.legacy-interface .legacy-intro p {
+  color: #333;
+  background: transparent;
+  margin: 8px 0 18px;
 }
 
 .legacy-interface h2 {
@@ -28,6 +47,10 @@
   color: #333;
   margin: 8px 0 18px;
 }
+
+/* ==========================================================
+   Photon Calculator
+   ========================================================== */
 
 .legacy-converter {
   display: grid;
@@ -49,6 +72,7 @@
   min-width: 0;
 }
 
+/* Retained for compatibility with the older input layout */
 .legacy-input .selection-panel {
   grid-template-columns: 4.5rem minmax(100px, 1fr);
   gap: 12px;
@@ -82,6 +106,10 @@
   font-weight: 500;
 }
 
+/* ==========================================================
+   Reference Sections
+   ========================================================== */
+
 .legacy-reference {
   margin-top: 34px;
 }
@@ -110,67 +138,106 @@
 }
 
 .legacy-note {
-  font-size: .92rem;
+  font-size: 0.92rem;
 }
+
+/* ==========================================================
+   Electromagnetic Spectrum Table
+   Explicit colors help prevent Hugo theme conflicts.
+   ========================================================== */
 
 .legacy-table-wrap {
   overflow-x: auto;
+  border-radius: 6px;
 }
 
-.legacy-spectrum-table {
+.legacy-interface .legacy-spectrum-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: .92rem;
+  font-size: 0.92rem;
+  color: #374151;
+  background: #fff;
 }
 
-.legacy-spectrum-table th {
-  font-weight: 600;
-  border-bottom: 1px solid #888;
+.legacy-interface .legacy-spectrum-table thead th {
+  padding: 10px 12px;
+  background: #f3f4f6;
+  color: #111827;
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 1px solid #9ca3af;
 }
 
-.legacy-spectrum-table th,
-.legacy-spectrum-table td {
+.legacy-interface .legacy-spectrum-table th,
+.legacy-interface .legacy-spectrum-table td {
   padding: 9px 12px;
-  vertical-align: top;
+  vertical-align: middle;
   white-space: nowrap;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.legacy-spectrum-table tbody tr:nth-child(even) {
-  background: #f5f5f5;
+.legacy-interface .legacy-spectrum-table tbody tr {
+  background: #fff;
+  color: #374151;
+  transition: background-color 0.15s ease;
 }
 
-.legacy-spectrum-table .spectrum-group-start>* {
-  border-top: 2px solid #b8b8b8;
+.legacy-interface .legacy-spectrum-table tbody tr:nth-child(even) {
+  background: #f8fafc;
 }
 
-.legacy-spectrum-table .spectrum-group-start:first-child>* {
+/* Consistent row hover */
+.legacy-interface .legacy-spectrum-table tbody tr:hover {
+  background: #ede9f3;
+  color: #1f2937;
+}
+
+/* Group separators */
+.legacy-interface .legacy-spectrum-table .spectrum-group-start>* {
+  border-top: 2px solid #cbd5e1;
+}
+
+.legacy-interface .legacy-spectrum-table .spectrum-group-start:first-child>* {
   border-top: 0;
 }
 
-.legacy-spectrum-table .spectrum-range-label {
+/* Range labels */
+.legacy-interface .legacy-spectrum-table .spectrum-range-label {
   min-width: 125px;
   vertical-align: middle;
   text-align: left;
-  font-size: .98rem;
-  border-right: 1px solid #ddd;
+  font-size: 0.98rem;
+  font-weight: 700;
+  border-right: 1px solid #d1d5db;
+  color: #111827;
 }
 
-.legacy-spectrum-table .spectrum-ultraviolet .spectrum-range-label {
+.legacy-interface .legacy-spectrum-table .spectrum-ultraviolet .spectrum-range-label {
   background: #f0eafa;
 }
 
-.legacy-spectrum-table .spectrum-visible .spectrum-range-label {
+.legacy-interface .legacy-spectrum-table .spectrum-visible .spectrum-range-label {
   background: #edf5e9;
 }
 
-.legacy-spectrum-table .spectrum-infrared .spectrum-range-label {
+.legacy-interface .legacy-spectrum-table .spectrum-infrared .spectrum-range-label {
   background: #f9eee2;
 }
 
-.legacy-spectrum-table tbody tr.spectrum-group-start {
-  background: #fafafa;
+/* Distinguish the start of each spectral region */
+.legacy-interface .legacy-spectrum-table tbody tr.spectrum-group-start {
+  background: #f3f4f6;
 }
+
+/* Keep range-label text readable on hover */
+.legacy-interface .legacy-spectrum-table tbody tr:hover .spectrum-range-label {
+  color: #111827;
+}
+
+/* ==========================================================
+   Responsive Layout
+   ========================================================== */
 
 @media (max-width: 700px) {
   .legacy-interface {
@@ -190,4 +257,44 @@
     grid-template-columns: 1fr;
     gap: 2px;
   }
+}
+
+
+/* ==========================================================
+   Visible Spectrum Colors
+   ========================================================== */
+
+.legacy-interface .legacy-spectrum-table .visible-violet {
+  color: #7c3aed;
+  font-weight: 600;
+}
+
+.legacy-interface .legacy-spectrum-table .visible-blue {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.legacy-interface .legacy-spectrum-table .visible-cyan {
+  color: #0891b2;
+  font-weight: 600;
+}
+
+.legacy-interface .legacy-spectrum-table .visible-green {
+  color: #15803d;
+  font-weight: 600;
+}
+
+.legacy-interface .legacy-spectrum-table .visible-yellow {
+  color: #a16207;
+  font-weight: 600;
+}
+
+.legacy-interface .legacy-spectrum-table .visible-orange {
+  color: #c2410c;
+  font-weight: 600;
+}
+
+.legacy-interface .legacy-spectrum-table .visible-red {
+  color: #dc2626;
+  font-weight: 600;
 }

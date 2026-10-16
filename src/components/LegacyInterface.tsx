@@ -29,13 +29,6 @@ export default function LegacyInterface({
 }: LegacyInterfaceProps) {
   return (
     <div className="legacy-interface">
-      <header className="legacy-intro">
-        <h1>Photon Properties &amp; Unit Conversions</h1>
-        <p>
-          Convert between photon energy, wavelength, wavenumber,
-          frequency, and period. Edit any field to update the others.
-        </p>
-      </header>
 
       <section
         className="legacy-converter"
@@ -100,7 +93,15 @@ export default function LegacyInterface({
                         {item.range}
                       </th>
                     )}
-                    <td>{item.subrange}</td>
+                    <td
+                      className={
+                        item.range === "Visible"
+                          ? `visible-color visible-${item.subrange.toLowerCase()}`
+                          : undefined
+                      }
+                    >
+                      {item.subrange}
+                    </td>
                     <td>{item.energy}</td>
                     <td>{item.wavelength}</td>
                     <td>{item.frequency}</td>
