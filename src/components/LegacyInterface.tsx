@@ -1,6 +1,5 @@
 
 import type { Photon } from "../types/photon";
-import PhotonReadout from "./PhotonReadout";
 import MultiUnitConverter from "./MultiUnitConverter";
 import "../styles/legacyInterface.css";
 
