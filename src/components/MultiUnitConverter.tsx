@@ -54,7 +54,7 @@ function wavelengthFromField(
         case "frequencyTHz":
             return 299792.458 / value;
         case "periodFs":
-            return 299792.458 * value / 1000;
+            return (299792.458 * value) / 1000;
         case "periodPs":
             return 299792.458 * value;
     }
@@ -62,34 +62,42 @@ function wavelengthFromField(
 
 const fieldGroups: {
     title: string;
-    fields: { key: FieldKey; unit: string; label: string }[];
+    fields: { key: FieldKey; label: string; unit: string }[];
 }[] = [
         {
             title: "Energy",
             fields: [
-                { key: "energyEV", label: "Energy", unit: "eV" },
-                { key: "energyMeV", label: "Energy", unit: "meV" },
+                { key: "energyEV", label: "Energy (eV)", unit: "eV" },
+                { key: "energyMeV", label: "Energy (meV)", unit: "meV" },
             ],
         },
         {
             title: "Wavelength",
             fields: [
-                { key: "wavelengthNm", label: "Wavelength", unit: "nm" },
-                { key: "wavelengthUm", label: "Wavelength", unit: "µm" },
+                { key: "wavelengthNm", label: "Wavelength (nm)", unit: "nm" },
+                { key: "wavelengthUm", label: "Wavelength (µm)", unit: "µm" },
             ],
         },
         {
             title: "Frequency and wavenumber",
             fields: [
-                { key: "wavenumber", label: "Wavenumber", unit: "cm⁻¹" },
-                { key: "frequencyTHz", label: "Frequency", unit: "THz" },
+                {
+                    key: "wavenumber",
+                    label: "Wavenumber (cm⁻¹)",
+                    unit: "cm⁻¹",
+                },
+                {
+                    key: "frequencyTHz",
+                    label: "Frequency (THz)",
+                    unit: "THz",
+                },
             ],
         },
         {
             title: "Period",
             fields: [
-                { key: "periodFs", label: "Period", unit: "fs" },
-                { key: "periodPs", label: "Period", unit: "ps" },
+                { key: "periodFs", label: "Period (fs)", unit: "fs" },
+                { key: "periodPs", label: "Period (ps)", unit: "ps" },
             ],
         },
     ];
@@ -101,29 +109,51 @@ export default function MultiUnitConverter({
     const [fields, setFields] = useState<Fields>(() =>
         fieldsFromWavelength(photon.wavelengthNm)
     );
-    const [activeField, setActiveField] = useState<FieldKey | null>(null);
+
+    const [activeField, setActiveField] =
+        useState<FieldKey | null>(null);
 
     useEffect(() => {
         const next = fieldsFromWavelength(photon.wavelengthNm);
 
         setFields((current) => {
-            if (!activeField) return next;
-            return { ...next, [activeField]: current[activeField] };
+            if (!activeField) {
+                return next;
+            }
+
+            return {
+                ...next,
+                [activeField]: current[activeField],
+            };
         });
     }, [photon.wavelengthNm, activeField]);
 
     function handleChange(key: FieldKey, text: string) {
         setActiveField(key);
-        setFields((current) => ({ ...current, [key]: text }));
 
-        const value = Number(text);
-        if (text.trim() === "" || !Number.isFinite(value) || value <= 0) {
+        setFields((current) => ({
+            ...current,
+            [key]: text,
+        }));
+
+        const trimmedText = text.trim();
+
+        if (trimmedText === "") {
+            return;
+        }
+
+        const value = Number(trimmedText);
+
+        if (!Number.isFinite(value) || value <= 0) {
             return;
         }
 
         const wavelengthNm = wavelengthFromField(key, value);
 
-        if (Number.isFinite(wavelengthNm) && wavelengthNm > 0) {
+        if (
+            Number.isFinite(wavelengthNm) &&
+            wavelengthNm > 0
+        ) {
             onWavelengthChange(wavelengthNm);
         }
     }
@@ -136,24 +166,37 @@ export default function MultiUnitConverter({
     return (
         <div className="multi-unit-converter">
             {fieldGroups.map((group) => (
-                <section className="converter-group" key={group.title}>
-                    <h3>{group.title}</h3>
+                <section
+                    className="converter-group"
+                    key={group.title}
+                >
                     {group.fields.map((field) => (
-                        <label className="converter-field" key={field.key}>
-                            <span>{field.label}</span>
-                            <input
-                                type="number"
-                                min="0"
-                                step="any"
-                                value={fields[field.key]}
-                                onFocus={() => setActiveField(field.key)}
-                                onChange={(event) =>
-                                    handleChange(field.key, event.target.value)
-                                }
-                                onBlur={handleBlur}
-                                aria-label={`${field.label} in ${field.unit}`}
-                            />
-                            <span className="converter-unit">{field.unit}</span>
+                        <label
+                            className="converter-field"
+                            key={field.key}
+                        >
+                            <span className="converter-label">
+                                {field.label}
+                            </span>
+
+                            <div className="converter-input-row">
+                                <input
+                                    type="text"
+                                    inputMode="decimal"
+                                    value={fields[field.key]}
+                                    onFocus={() =>
+                                        setActiveField(field.key)
+                                    }
+                                    onChange={(event) =>
+                                        handleChange(
+                                            field.key,
+                                            event.target.value
+                                        )
+                                    }
+                                    onBlur={handleBlur}
+                                    aria-label={field.label}
+                                />
+                            </div>
                         </label>
                     ))}
                 </section>

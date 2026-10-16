@@ -728,3 +728,71 @@ p {
   border-radius: 999px;
 
 }
+
+
+
+.photon-calculator-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+}
+
+
+
+/* ==========================================================
+   Interface Mode Switch
+   ========================================================== */
+
+.ui-mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  color: #4b5563;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.ui-mode-switch>span {
+  flex-shrink: 0;
+}
+
+.ui-mode-switch button {
+  padding: 9px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  color: #374151;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ui-mode-switch button:hover:not(.active) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.ui-mode-switch button.active {
+  background: #7a5a9a;
+  border-color: #7a5a9a;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(122, 90, 154, 0.25);
+}
+
+.ui-mode-switch button:focus-visible {
+  outline: 2px solid #7a5a9a;
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .ui-mode-switch {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

@@ -1,41 +1,28 @@
+
 import { useEffect, useState } from "react";
 import "./index.css";
+
 import type { UIMode } from "./types/uiMode";
+import type { LaserCategory } from "./types/laserCategory";
+import type { Laser } from "./types/laser";
+import type { MaterialCategory } from "./types/materialCategory";
+import type { Material } from "./types/material";
+
 import LegacyInterface from "./components/LegacyInterface";
-
-import type { InputMode } from "./types/inputMode";
-import { photonFromWavelength } from "./physics/photon";
+import MultiUnitConverter from "./components/MultiUnitConverter";
 import WelcomeCard from "./components/WelcomeCard";
-import PhotonReadout from "./components/PhotonReadout";
 import SpectrumCanvas from "./components/SpectrumCanvas";
-import SelectionPanel from "./components/SelectionPanel";
-
 import OverlayPanel from "./components/OverlayPanel";
-import type { LaserCategory }
-  from "./types/laserCategory";
-import { findNearestLaser }
-  from "./data/lasers/findNearestLaser";
 import LaserInfoCard from "./components/LaserInfoCard";
 import AvailableLasers from "./components/AvailableLasers";
-import type { Laser } from "./types/laser";
-import type { MaterialCategory }
-  from "./types/materialCategory";
+import AvailableMaterials from "./components/AvailableMaterials";
+import MaterialInfoCard from "./components/MaterialInfoCard";
 
-import {
-  inputToWavelength,
-  energyToWavelength,
-} from "./physics/conversions";
+import { photonFromWavelength } from "./physics/photon";
+import { energyToWavelength } from "./physics/conversions";
 
-import type { Material }
-  from "./types/material";
-import AvailableMaterials
-  from "./components/AvailableMaterials";
-
-import MaterialInfoCard
-  from "./components/MaterialInfoCard";
-
-import { findNearestMaterial }
-  from "./data/materials/findNearestMaterial";
+import { findNearestLaser } from "./data/lasers/findNearestLaser";
+import { findNearestMaterial } from "./data/materials/findNearestMaterial";
 
 function App() {
   /* ==========================================================
@@ -44,17 +31,9 @@ function App() {
 
   const [wavelength, setWavelength] = useState(680);
 
-  const [inputMode, setInputMode] =
-    useState<InputMode>("nm");
-
-  const [showLasers, setShowLasers] =
-    useState(false);
-
+  const [showLasers, setShowLasers] = useState(false);
   const [laserCategory, setLaserCategory] =
     useState<LaserCategory>("modern");
-
-  const [inputText, setInputText] =
-    useState(wavelength.toFixed(2));
 
   const [selectedLaser, setSelectedLaser] =
     useState<Laser | null>(null);
@@ -62,18 +41,14 @@ function App() {
   const [selectedMaterial, setSelectedMaterial] =
     useState<Material | null>(null);
 
-  const [showMaterials, setShowMaterials] =
-    useState(false);
-
+  const [showMaterials, setShowMaterials] = useState(false);
   const [materialCategory, setMaterialCategory] =
     useState<MaterialCategory>("tmd");
-
 
   const [activePanel, setActivePanel] =
     useState<"laser" | "material" | null>(null);
 
-  const [uiMode, setUiMode] =
-    useState<UIMode>("modern");
+  const [uiMode, setUiMode] = useState<UIMode>("modern");
 
   /* ==========================================================
    * Derived Data
@@ -81,235 +56,83 @@ function App() {
 
   const photon = photonFromWavelength(wavelength);
 
+  /* ==========================================================
+   * Effects
+   * ========================================================== */
 
   useEffect(() => {
-
-    if (inputMode === "nm") {
-
-      setInputText(
-        wavelength.toFixed(2)
-      );
-
-    } else {
-
-      setInputText(
-        photon.energyEV.toFixed(4)
-      );
-
-    }
-
-  }, [
-    wavelength,
-    photon.energyEV,
-    inputMode,
-  ]);
-
-
-  useEffect(() => {
-
     setSelectedLaser(
-
-      findNearestLaser(
-        wavelength,
-        laserCategory,
-      )
-
+      findNearestLaser(wavelength, laserCategory)
     );
-
-  }, [
-
-    wavelength,
-
-    laserCategory,
-
-  ]);
-
+  }, [wavelength, laserCategory]);
 
   useEffect(() => {
-
     if (showLasers) {
-
       setActivePanel("laser");
-
     }
-
-  }, [
-
-    showLasers,
-
-  ]);
+  }, [showLasers]);
 
   useEffect(() => {
-
-    if (
-
-      !showMaterials &&
-
-      activePanel === "material"
-
-    ) {
-
+    if (!showMaterials && activePanel === "material") {
       if (showLasers) {
-
         setActivePanel("laser");
-
       } else {
-
         setActivePanel(null);
-
       }
-
     }
-
-  }, [
-
-    showMaterials,
-
-    showLasers,
-
-    activePanel,
-
-  ]);
-
+  }, [showMaterials, showLasers, activePanel]);
 
   useEffect(() => {
-
-    if (
-
-      !showLasers &&
-
-      activePanel === "laser"
-
-    ) {
-
+    if (!showLasers && activePanel === "laser") {
       if (showMaterials) {
-
         setActivePanel("material");
-
       } else {
-
         setActivePanel(null);
-
       }
-
     }
-
-  }, [
-
-    showLasers,
-
-    showMaterials,
-
-    activePanel,
-
-  ]);
-
-
+  }, [showLasers, showMaterials, activePanel]);
 
   useEffect(() => {
-
     if (showMaterials) {
-
       setActivePanel("material");
-
     }
-
-  }, [
-
-    showMaterials,
-
-  ]);
-
-
+  }, [showMaterials]);
 
   useEffect(() => {
-
     setSelectedMaterial(
-
-      findNearestMaterial(
-
-        wavelength,
-
-        materialCategory,
-
-      )
-
+      findNearestMaterial(wavelength, materialCategory)
     );
+  }, [wavelength, materialCategory]);
 
-  }, [
-
-    wavelength,
-
-    materialCategory,
-
-  ]);
   /* ==========================================================
    * Event Handlers
    * ========================================================== */
-  function handleLaserSelect(
-    laser: Laser,
-  ) {
+
+  function handleLaserSelect(laser: Laser) {
     setActivePanel("laser");
     setSelectedLaser(laser);
 
-    if (
-      laser.wavelength >= 250 &&
-      laser.wavelength <= 1000
-    ) {
-
-      setWavelength(
-        laser.wavelength,
-      );
-
+    if (laser.wavelength >= 250 && laser.wavelength <= 1000) {
+      setWavelength(laser.wavelength);
     }
-
   }
 
-
-
-
-  function handleMaterialSelect(
-    material: Material,
-  ) {
+  function handleMaterialSelect(material: Material) {
     setActivePanel("material");
-    setSelectedMaterial(
-      material,
-    );
+    setSelectedMaterial(material);
 
-    const wavelength =
-      energyToWavelength(
-        material.bandgapEV,
-      );
+    const selectedWavelength = energyToWavelength(
+      material.bandgapEV
+    );
 
     if (
-      wavelength >= 250 &&
-      wavelength <= 1000
+      selectedWavelength >= 250 &&
+      selectedWavelength <= 1000
     ) {
-
-      setWavelength(
-        wavelength,
-      );
-
+      setWavelength(selectedWavelength);
     }
-
   }
 
-  function commitInput() {
-
-    const value = Number(inputText);
-
-    if (Number.isNaN(value)) {
-      return;
-    }
-
-    setWavelength(
-      inputToWavelength(
-        value,
-        inputMode,
-      )
-    );
-
-  }
   /* ==========================================================
    * Render
    * ========================================================== */
@@ -348,37 +171,18 @@ function App() {
 
       {uiMode === "modern" ? (
         <>
-          <div className="top-panel">
+          <div className="card photon-calculator-card">
+            <h2>Photon Calculator</h2>
 
-            <div className="card selection-card">
-
-              <h2>Selection</h2>
-
-              <SelectionPanel
-                inputMode={inputMode}
-                inputText={inputText}
-                onInputModeChange={setInputMode}
-                onInputTextChange={setInputText}
-                onCommit={commitInput}
-              />
-
-            </div>
-
-            <div className="card properties-card">
-
-              <h2>Photon Properties</h2>
-
-              <PhotonReadout
-                photon={photon}
-              />
-
-            </div>
+            <MultiUnitConverter
+              photon={photon}
+              onWavelengthChange={setWavelength}
+            />
           </div>
 
-
+         
 
           <div className="spectrum-scroll">
-
             <SpectrumCanvas
               wavelength={wavelength}
               showLasers={showLasers}
@@ -387,136 +191,79 @@ function App() {
               materialCategory={materialCategory}
               onWavelengthChange={setWavelength}
             />
-
           </div>
 
           <div className="bottom-panel">
-
             <div className="card overlay-card">
-
               <OverlayPanel
                 showLasers={showLasers}
                 laserCategory={laserCategory}
                 onShowLasersChange={setShowLasers}
                 onLaserCategoryChange={setLaserCategory}
-
                 showMaterials={showMaterials}
                 materialCategory={materialCategory}
                 onShowMaterialsChange={setShowMaterials}
                 onMaterialCategoryChange={setMaterialCategory}
               />
-
             </div>
+
             <div className="card information-card">
               {showLasers && showMaterials && (
-
                 <div className="information-toggle">
-
                   <button
-
                     className={
                       activePanel === "laser"
                         ? "toggle-button active"
                         : "toggle-button"
                     }
-
-                    onClick={() =>
-                      setActivePanel("laser")
-                    }
-
+                    onClick={() => setActivePanel("laser")}
                   >
-
                     Laser
-
                   </button>
 
                   <button
-
                     className={
                       activePanel === "material"
                         ? "toggle-button active"
                         : "toggle-button"
                     }
-
-                    onClick={() =>
-                      setActivePanel("material")
-                    }
-
+                    onClick={() => setActivePanel("material")}
                   >
-
                     Material
-
                   </button>
-
-
                 </div>
-
               )}
 
+              {activePanel === null && <WelcomeCard />}
 
-              {activePanel === null && (
-
-                <WelcomeCard />
-
+              {activePanel === "laser" && selectedLaser && (
+                <LaserInfoCard laser={selectedLaser} />
               )}
 
-              {activePanel === "laser" &&
-                selectedLaser && (
-
-                  <LaserInfoCard
-                    laser={selectedLaser}
-                  />
-
-                )}
-
-              {activePanel === "material" &&
-                selectedMaterial && (
-
-                  <MaterialInfoCard
-                    material={selectedMaterial}
-                  />
-
-                )}
-
+              {activePanel === "material" && selectedMaterial && (
+                <MaterialInfoCard material={selectedMaterial} />
+              )}
             </div>
-
           </div>
 
-
           {showLasers && (
-
             <div className="card available-lasers-card">
-
               <AvailableLasers
-
                 category={laserCategory}
-
                 selectedLaser={selectedLaser}
-
                 onLaserSelect={handleLaserSelect}
-
               />
-
             </div>
-
           )}
 
           {showMaterials && (
-
             <div className="card available-materials-card">
-
               <AvailableMaterials
-
                 category={materialCategory}
-
                 selectedMaterial={selectedMaterial}
-
                 onMaterialSelect={handleMaterialSelect}
-
               />
-
             </div>
-
           )}
         </>
       ) : (
@@ -525,7 +272,6 @@ function App() {
           onWavelengthChange={setWavelength}
         />
       )}
-
     </main>
   );
 }
