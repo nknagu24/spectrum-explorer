@@ -63,6 +63,36 @@ export default function LegacyInterface({
         </div>
       </section>
 
+      <section className="legacy-reference" aria-labelledby="legacy-spectrum-title">
+        <h2 id="legacy-spectrum-title">Electromagnetic spectrum reference</h2>
+        <div className="legacy-table-wrap">
+          <table className="legacy-spectrum-table">
+            <thead>
+              <tr><th>Range</th><th>Subrange</th><th>Energy</th><th>Wavelength</th><th>Frequency</th></tr>
+            </thead>
+            <tbody>
+              {spectralRanges.map((item, index) => {
+                const startsGroup = index === 0 || spectralRanges[index - 1].range !== item.range;
+                return (
+                  <tr
+                    key={item.range + item.subrange}
+                    className={startsGroup ? `spectrum-group-start spectrum-${item.range.toLowerCase().replace(/\\s+/g, "-")}` : undefined}
+                  >
+                    {startsGroup && (
+                      <th className="spectrum-range-label" scope="rowgroup" rowSpan={spectralRanges.filter((entry) => entry.range === item.range).length}>
+                        {item.range}
+                      </th>
+                    )}
+                    <td>{item.subrange}</td><td>{item.energy}</td><td>{item.wavelength}</td><td>{item.frequency}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
       <section className="legacy-reference" aria-labelledby="legacy-formulas-title">
         <h2 id="legacy-formulas-title">Relevant formulas</h2>
         <dl className="legacy-formulas">
@@ -82,24 +112,6 @@ export default function LegacyInterface({
           These relations use vacuum wavelength. Wavenumber is reported in cm⁻¹,
           frequency in THz, energy in eV, and momentum in kg m s⁻¹.
         </p>
-      </section>
-
-      <section className="legacy-reference" aria-labelledby="legacy-spectrum-title">
-        <h2 id="legacy-spectrum-title">Electromagnetic spectrum reference</h2>
-        <div className="legacy-table-wrap">
-          <table className="legacy-spectrum-table">
-            <thead>
-              <tr><th>Range</th><th>Subrange</th><th>Energy</th><th>Wavelength</th><th>Frequency</th></tr>
-            </thead>
-            <tbody>
-              {spectralRanges.map((item) => (
-                <tr key={item.range + item.subrange}>
-                  <td>{item.range}</td><td>{item.subrange}</td><td>{item.energy}</td><td>{item.wavelength}</td><td>{item.frequency}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
       </section>
     </div>
   );
