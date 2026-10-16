@@ -348,185 +348,181 @@ function App() {
 
       {uiMode === "modern" ? (
         <>
-                <div className="top-panel">
-          
-                  <div className="card selection-card">
-          
-                    <h2>Selection</h2>
-          
-                    <SelectionPanel
-                      inputMode={inputMode}
-                      inputText={inputText}
-                      onInputModeChange={setInputMode}
-                      onInputTextChange={setInputText}
-                      onCommit={commitInput}
-                    />
-          
-                  </div>
-          
-                  <div className="card properties-card">
-          
-                    <h2>Photon Properties</h2>
-          
-                    <PhotonReadout
-                      photon={photon}
-                    />
-          
-                  </div>
+          <div className="top-panel">
+
+            <div className="card selection-card">
+
+              <h2>Selection</h2>
+
+              <SelectionPanel
+                inputMode={inputMode}
+                inputText={inputText}
+                onInputModeChange={setInputMode}
+                onInputTextChange={setInputText}
+                onCommit={commitInput}
+              />
+
+            </div>
+
+            <div className="card properties-card">
+
+              <h2>Photon Properties</h2>
+
+              <PhotonReadout
+                photon={photon}
+              />
+
+            </div>
+          </div>
+
+
+
+          <div className="spectrum-scroll">
+
+            <SpectrumCanvas
+              wavelength={wavelength}
+              showLasers={showLasers}
+              laserCategory={laserCategory}
+              showMaterials={showMaterials}
+              materialCategory={materialCategory}
+              onWavelengthChange={setWavelength}
+            />
+
+          </div>
+
+          <div className="bottom-panel">
+
+            <div className="card overlay-card">
+
+              <OverlayPanel
+                showLasers={showLasers}
+                laserCategory={laserCategory}
+                onShowLasersChange={setShowLasers}
+                onLaserCategoryChange={setLaserCategory}
+
+                showMaterials={showMaterials}
+                materialCategory={materialCategory}
+                onShowMaterialsChange={setShowMaterials}
+                onMaterialCategoryChange={setMaterialCategory}
+              />
+
+            </div>
+            <div className="card information-card">
+              {showLasers && showMaterials && (
+
+                <div className="information-toggle">
+
+                  <button
+
+                    className={
+                      activePanel === "laser"
+                        ? "toggle-button active"
+                        : "toggle-button"
+                    }
+
+                    onClick={() =>
+                      setActivePanel("laser")
+                    }
+
+                  >
+
+                    Laser
+
+                  </button>
+
+                  <button
+
+                    className={
+                      activePanel === "material"
+                        ? "toggle-button active"
+                        : "toggle-button"
+                    }
+
+                    onClick={() =>
+                      setActivePanel("material")
+                    }
+
+                  >
+
+                    Material
+
+                  </button>
+
+
                 </div>
-          
-          
-          
-                <div className="spectrum-scroll">
-          
-                  <SpectrumCanvas
-                    wavelength={wavelength}
-                    showLasers={showLasers}
-                    laserCategory={laserCategory}
-                    showMaterials={showMaterials}
-                    materialCategory={materialCategory}
-                    onWavelengthChange={setWavelength}
+
+              )}
+
+
+              {activePanel === null && (
+
+                <WelcomeCard />
+
+              )}
+
+              {activePanel === "laser" &&
+                selectedLaser && (
+
+                  <LaserInfoCard
+                    laser={selectedLaser}
                   />
-          
-                </div>
-          
-                <div className="bottom-panel">
-          
-                  <div className="card overlay-card">
-          
-                    <OverlayPanel
-                      showLasers={showLasers}
-                      laserCategory={laserCategory}
-                      onShowLasersChange={setShowLasers}
-                      onLaserCategoryChange={setLaserCategory}
-          
-                      showMaterials={showMaterials}
-                      materialCategory={materialCategory}
-                      onShowMaterialsChange={setShowMaterials}
-                      onMaterialCategoryChange={setMaterialCategory}
-                    />
-          
-                  </div>
-                  <div className="card information-card">
-                    {showLasers && showMaterials && (
-          
-                      <div className="information-toggle">
-          
-                        <button
-          
-                          className={
-                            activePanel === "laser"
-                              ? "toggle-button active"
-                              : "toggle-button"
-                          }
-          
-                          onClick={() =>
-                            setActivePanel("laser")
-                          }
-          
-                        >
-          
-                          Laser
-          
-                        </button>
-          
-                        <button
-          
-                          className={
-                            activePanel === "material"
-                              ? "toggle-button active"
-                              : "toggle-button"
-                          }
-          
-                          onClick={() =>
-                            setActivePanel("material")
-                          }
-          
-                        >
-          
-                          Material
-          
-                        </button>
-          
-          
-                      </div>
-          
-                    )}
-          
-          
-                    {activePanel === null && (
-          
-                      <WelcomeCard />
-          
-                    )}
-          
-                    {activePanel === "laser" &&
-                      selectedLaser && (
-          
-                        <LaserInfoCard
-                          laser={selectedLaser}
-                        />
-          
-                      )}
-          
-                    {activePanel === "material" &&
-                      selectedMaterial && (
-          
-                        <MaterialInfoCard
-                          material={selectedMaterial}
-                        />
-          
-                      )}
-          
-                  </div>
-          
-                </div>
-          
-          
-                {showLasers && (
-          
-                  <div className="card available-lasers-card">
-          
-                    <AvailableLasers
-          
-                      category={laserCategory}
-          
-                      selectedLaser={selectedLaser}
-          
-                      onLaserSelect={handleLaserSelect}
-          
-                    />
-          
-                  </div>
-          
+
                 )}
-          
-                {showMaterials && (
-          
-                  <div className="card available-materials-card">
-          
-                    <AvailableMaterials
-          
-                      category={materialCategory}
-          
-                      selectedMaterial={selectedMaterial}
-          
-                      onMaterialSelect={handleMaterialSelect}
-          
-                    />
-          
-                  </div>
-          
+
+              {activePanel === "material" &&
+                selectedMaterial && (
+
+                  <MaterialInfoCard
+                    material={selectedMaterial}
+                  />
+
                 )}
+
+            </div>
+
+          </div>
+
+
+          {showLasers && (
+
+            <div className="card available-lasers-card">
+
+              <AvailableLasers
+
+                category={laserCategory}
+
+                selectedLaser={selectedLaser}
+
+                onLaserSelect={handleLaserSelect}
+
+              />
+
+            </div>
+
+          )}
+
+          {showMaterials && (
+
+            <div className="card available-materials-card">
+
+              <AvailableMaterials
+
+                category={materialCategory}
+
+                selectedMaterial={selectedMaterial}
+
+                onMaterialSelect={handleMaterialSelect}
+
+              />
+
+            </div>
+
+          )}
         </>
       ) : (
         <LegacyInterface
-          inputMode={inputMode}
-          inputText={inputText}
           photon={photon}
-          onInputModeChange={setInputMode}
-          onInputTextChange={setInputText}
-          onCommit={commitInput}
+          onWavelengthChange={setWavelength}
         />
       )}
 

@@ -1,16 +1,12 @@
-import type { InputMode } from "../types/inputMode";
+
 import type { Photon } from "../types/photon";
-import SelectionPanel from "./SelectionPanel";
 import PhotonReadout from "./PhotonReadout";
+import MultiUnitConverter from "./MultiUnitConverter";
 import "../styles/legacyInterface.css";
 
 interface LegacyInterfaceProps {
-  inputMode: InputMode;
-  inputText: string;
   photon: Photon;
-  onInputModeChange: (mode: InputMode) => void;
-  onInputTextChange: (text: string) => void;
-  onCommit: () => void;
+  onWavelengthChange: (wavelengthNm: number) => void;
 }
 
 const spectralRanges = [
@@ -29,61 +25,86 @@ const spectralRanges = [
 ];
 
 export default function LegacyInterface({
-  inputMode,
-  inputText,
   photon,
-  onInputModeChange,
-  onInputTextChange,
-  onCommit,
+  onWavelengthChange,
 }: LegacyInterfaceProps) {
   return (
     <div className="legacy-interface">
       <header className="legacy-intro">
         <h1>Photon Properties &amp; Unit Conversions</h1>
         <p>
-          Convert wavelength and photon energy, and explore the corresponding
-          frequency, wavenumber, and momentum. Enter a value below; the other
-          photon properties update automatically.
+          Convert between photon energy, wavelength, wavenumber,
+          frequency, and period. Edit any field to update the others.
         </p>
       </header>
 
-      <section className="legacy-converter" aria-labelledby="legacy-converter-title">
+      <section
+        className="legacy-converter"
+        aria-labelledby="legacy-converter-title"
+      >
         <h2 id="legacy-converter-title">Photon calculator</h2>
-        <div className="legacy-input">
-          <SelectionPanel
-            inputMode={inputMode}
-            inputText={inputText}
-            onInputModeChange={onInputModeChange}
-            onInputTextChange={onInputTextChange}
-            onCommit={onCommit}
+        <div className="legacy-multi-converter">
+          <MultiUnitConverter
+            photon={photon}
+            onWavelengthChange={onWavelengthChange}
           />
-        </div>
-        <div className="legacy-results">
-          <PhotonReadout photon={photon} />
         </div>
       </section>
 
-      <section className="legacy-reference" aria-labelledby="legacy-spectrum-title">
-        <h2 id="legacy-spectrum-title">Electromagnetic spectrum reference</h2>
+      <section
+        className="legacy-reference"
+        aria-labelledby="legacy-spectrum-title"
+      >
+        <h2 id="legacy-spectrum-title">
+          Electromagnetic spectrum reference
+        </h2>
         <div className="legacy-table-wrap">
           <table className="legacy-spectrum-table">
             <thead>
-              <tr><th>Range</th><th>Subrange</th><th>Energy</th><th>Wavelength</th><th>Frequency</th></tr>
+              <tr>
+                <th>Range</th>
+                <th>Subrange</th>
+                <th>Energy</th>
+                <th>Wavelength</th>
+                <th>Frequency</th>
+              </tr>
             </thead>
             <tbody>
               {spectralRanges.map((item, index) => {
-                const startsGroup = index === 0 || spectralRanges[index - 1].range !== item.range;
+                const startsGroup =
+                  index === 0 ||
+                  spectralRanges[index - 1].range !== item.range;
+
+                const rangeClass = item.range
+                  .toLowerCase()
+                  .replace(/\s+/g, "-");
+
                 return (
                   <tr
                     key={item.range + item.subrange}
-                    className={startsGroup ? `spectrum-group-start spectrum-${item.range.toLowerCase().replace(/\\s+/g, "-")}` : undefined}
+                    className={
+                      startsGroup
+                        ? `spectrum-group-start spectrum-${rangeClass}`
+                        : undefined
+                    }
                   >
                     {startsGroup && (
-                      <th className="spectrum-range-label" scope="rowgroup" rowSpan={spectralRanges.filter((entry) => entry.range === item.range).length}>
+                      <th
+                        className="spectrum-range-label"
+                        scope="rowgroup"
+                        rowSpan={
+                          spectralRanges.filter(
+                            (entry) => entry.range === item.range
+                          ).length
+                        }
+                      >
                         {item.range}
                       </th>
                     )}
-                    <td>{item.subrange}</td><td>{item.energy}</td><td>{item.wavelength}</td><td>{item.frequency}</td>
+                    <td>{item.subrange}</td>
+                    <td>{item.energy}</td>
+                    <td>{item.wavelength}</td>
+                    <td>{item.frequency}</td>
                   </tr>
                 );
               })}
@@ -92,25 +113,53 @@ export default function LegacyInterface({
         </div>
       </section>
 
-
-      <section className="legacy-reference" aria-labelledby="legacy-formulas-title">
+      <section
+        className="legacy-reference"
+        aria-labelledby="legacy-formulas-title"
+      >
         <h2 id="legacy-formulas-title">Relevant formulas</h2>
         <dl className="legacy-formulas">
-          <div><dt>Photon energy</dt><dd><i>E</i> = <i>hc</i>/λ</dd></div>
-          <div><dt>Frequency</dt><dd>ν = <i>c</i>/λ</dd></div>
-          <div><dt>Wavenumber</dt><dd>ṽ = 1/λ (λ in cm)</dd></div>
-          <div><dt>Period</dt><dd><i>T</i> = 1/ν</dd></div>
-          <div><dt>Photon momentum</dt><dd><i>p</i> = <i>h</i>/λ</dd></div>
+          <div>
+            <dt>Photon energy</dt>
+            <dd><i>E</i> = <i>hc</i>/λ</dd>
+          </div>
+          <div>
+            <dt>Frequency</dt>
+            <dd>ν = <i>c</i>/λ</dd>
+          </div>
+          <div>
+            <dt>Wavenumber</dt>
+            <dd>ṽ = 1/λ (λ in cm)</dd>
+          </div>
+          <div>
+            <dt>Period</dt>
+            <dd><i>T</i> = 1/ν</dd>
+          </div>
+          <div>
+            <dt>Photon momentum</dt>
+            <dd><i>p</i> = <i>h</i>/λ</dd>
+          </div>
         </dl>
+
         <h2>Physical constants</h2>
         <dl className="legacy-constants">
-          <div><dt>Speed of light, <i>c</i></dt><dd>299,792,458 m s⁻¹</dd></div>
-          <div><dt>Planck constant, <i>h</i></dt><dd>6.62607015 × 10⁻³⁴ J s</dd></div>
-          <div><dt>Energy–wavelength relation</dt><dd><i>hc</i> ≈ 1239.84 eV nm</dd></div>
+          <div>
+            <dt>Speed of light, <i>c</i></dt>
+            <dd>299,792,458 m s⁻¹</dd>
+          </div>
+          <div>
+            <dt>Planck constant, <i>h</i></dt>
+            <dd>6.62607015 × 10⁻³⁴ J s</dd>
+          </div>
+          <div>
+            <dt>Energy–wavelength relation</dt>
+            <dd><i>hc</i> ≈ 1239.84 eV nm</dd>
+          </div>
         </dl>
+
         <p className="legacy-note">
-          These relations use vacuum wavelength. Wavenumber is reported in cm⁻¹,
-          frequency in THz, energy in eV, and momentum in kg m s⁻¹.
+          These relations use vacuum wavelength. Wavenumber is reported
+          in cm⁻¹, frequency in THz, energy in eV, and momentum in kg m s⁻¹.
         </p>
       </section>
     </div>
