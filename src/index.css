@@ -140,11 +140,14 @@ p {
 /* ==========================================================
    Spectrum
    ========================================================== */
-
 .spectrum-canvas {
+
   display: block;
 
   width: 100%;
+
+  min-width: 600px;
+
 }
 
 /* ==========================================================
@@ -693,5 +696,35 @@ p {
 .welcome-card li {
 
   margin-bottom: 8px;
+
+}
+
+
+/* ==========================================================
+   Spectrum Scrolling
+   ========================================================== */
+
+.spectrum-scroll {
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+
+  -webkit-overflow-scrolling: touch;
+
+}
+
+
+.spectrum-scroll::-webkit-scrollbar {
+
+  height: 8px;
+
+}
+
+.spectrum-scroll::-webkit-scrollbar-thumb {
+
+  background: #d1d5db;
+
+  border-radius: 999px;
 
 }

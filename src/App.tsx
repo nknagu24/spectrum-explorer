@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./index.css";
+import type { UIMode } from "./types/uiMode";
 
 import type { InputMode } from "./types/inputMode";
 import { photonFromWavelength } from "./physics/photon";
@@ -70,7 +71,8 @@ function App() {
   const [activePanel, setActivePanel] =
     useState<"laser" | "material" | null>(null);
 
-
+  const [uiMode, setUiMode] =
+    useState<UIMode>("modern");
 
   /* ==========================================================
    * Derived Data
@@ -313,6 +315,35 @@ function App() {
 
   return (
     <main>
+      <div className="ui-mode-switch">
+        <span>Interface:</span>
+
+        <button
+          type="button"
+          className={
+            uiMode === "modern"
+              ? "ui-mode-button active"
+              : "ui-mode-button"
+          }
+          onClick={() => setUiMode("modern")}
+          aria-pressed={uiMode === "modern"}
+        >
+          Modern UI
+        </button>
+
+        <button
+          type="button"
+          className={
+            uiMode === "legacy"
+              ? "ui-mode-button active"
+              : "ui-mode-button"
+          }
+          onClick={() => setUiMode("legacy")}
+          aria-pressed={uiMode === "legacy"}
+        >
+          Legacy UI
+        </button>
+      </div>
 
       <div className="top-panel">
 
@@ -343,17 +374,18 @@ function App() {
 
 
 
-      <SpectrumCanvas
-        wavelength={wavelength}
+      <div className="spectrum-scroll">
 
-        showLasers={showLasers}
-        laserCategory={laserCategory}
+        <SpectrumCanvas
+          wavelength={wavelength}
+          showLasers={showLasers}
+          laserCategory={laserCategory}
+          showMaterials={showMaterials}
+          materialCategory={materialCategory}
+          onWavelengthChange={setWavelength}
+        />
 
-        showMaterials={showMaterials}
-        materialCategory={materialCategory}
-
-        onWavelengthChange={setWavelength}
-      />
+      </div>
 
       <div className="bottom-panel">
 
