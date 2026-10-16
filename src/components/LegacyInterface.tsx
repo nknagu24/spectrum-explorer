@@ -18,6 +18,7 @@ const spectralRanges = [
   { range: "Ultraviolet", subrange: "UVB / UVA", energy: "4.43–3.26 eV", wavelength: "280–380 nm", frequency: "1070–789 THz" },
   { range: "Visible", subrange: "Violet", energy: "3.26–2.85 eV", wavelength: "380–435 nm", frequency: "789–689 THz" },
   { range: "Visible", subrange: "Blue", energy: "2.85–2.48 eV", wavelength: "435–500 nm", frequency: "689–600 THz" },
+  { range: "Visible", subrange: "Cyan", energy: "2.48–2.38 eV", wavelength: "500–520 nm", frequency: "600–577 THz" },
   { range: "Visible", subrange: "Green", energy: "2.38–2.19 eV", wavelength: "520–565 nm", frequency: "577–531 THz" },
   { range: "Visible", subrange: "Yellow", energy: "2.19–2.10 eV", wavelength: "565–590 nm", frequency: "531–508 THz" },
   { range: "Visible", subrange: "Orange", energy: "2.10–1.98 eV", wavelength: "590–625 nm", frequency: "508–480 THz" },
@@ -67,7 +68,7 @@ export default function LegacyInterface({
         <dl className="legacy-formulas">
           <div><dt>Photon energy</dt><dd><i>E</i> = <i>hc</i>/λ</dd></div>
           <div><dt>Frequency</dt><dd>ν = <i>c</i>/λ</dd></div>
-          <div><dt>Wavenumber</dt><dd>ṽ = 1/λ</dd></div>
+          <div><dt>Wavenumber</dt><dd>ṽ = 1/λ (λ in cm)</dd></div>
           <div><dt>Period</dt><dd><i>T</i> = 1/ν</dd></div>
           <div><dt>Photon momentum</dt><dd><i>p</i> = <i>h</i>/λ</dd></div>
         </dl>
